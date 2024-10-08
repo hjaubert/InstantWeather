@@ -16,9 +16,11 @@
     </header>
     <main>
         <div id="barreDeRecherche">
-            <div id="inputRecherche">
-                <input type="text" placeholder="Entrez votre code postal" min="0">
-            </div>
+            <form action="#">
+                <div id="inputRecherche">
+                    <input type="text" id="zoneCodePostal" placeholder="Entrez votre code postal (à 5 chiffres)" pattern="^\d{5}$" maxlength="5" required>
+                </div>
+            </form>
             <div id="loupeRecherche">
                 <span class="fa-solid fa-magnifying-glass"></span>
             </div>
