@@ -40,4 +40,20 @@ input {
     align-items: center;
     justify-content: center;
     margin: 20px;
+    border: solid 5px black;
+    border-radius: 10%;
+    width: 15vw;
+    height: 35vh;
+}
+
+.fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
+    font-size: 3vw;
+}
+
+h2{
+    font-size: 2vw;
+}
+
+h3{
+    font-size: 2vw;
 }
