@@ -27,17 +27,17 @@ function creationCarte(TypeCarte, valeur){
         case "T° Min":
             span.classList.add("fa-solid", "fa-temperature-low")
             h2[0].textContent = TypeCarte
-            h3[0].textContent = valeur
+            h3[0].textContent = valeur + " °C"
             break;
         
         case "T° Max":
             span.classList.add("fa-solid", "fa-temperature-high")
             h2[0].textContent = TypeCarte
-            h3[0].textContent = valeur
+            h3[0].textContent = valeur + " °C"
             break;
     
         case "Proba pluie":
-            span.classList.add("fa-regular", "fa-cloud-rain")
+            span.classList.add("fa-solid", "fa-cloud-rain")
             h2[0].textContent = TypeCarte
             h3[0].textContent = valeur + " %"
             break;
@@ -50,3 +50,5 @@ function creationCarte(TypeCarte, valeur){
 
 creationCarte(TypeCarte.TMax, 12)
 creationCarte(TypeCarte.Ensoleillement,6)
+creationCarte(TypeCarte.TMin, 6)
+creationCarte(TypeCarte.ProbaPluie, 60)
