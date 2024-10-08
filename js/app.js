@@ -1,4 +1,4 @@
-let resultatDepartement = document.getElementById("resultatDepartement")
+let resultatCodePostal = document.getElementById("resultatDepartement")
 var zoneCodePostal = document.getElementById("zoneCodePostal");
 var str = ""
 var verifCaractere
@@ -17,7 +17,7 @@ function recherche(valeur){
             afficheVille()
         }
         else{
-            resultatDepartement.innerText = "resultat :"
+            resultatCodePostal.innerText = "resultat :"
         }
     }
     console.log(str.length)
@@ -40,7 +40,7 @@ function afficheVille(){
     })
     .then(data => {
         console.log(data);
-        resultatDepartement.innerText = resultatDepartement.textContent + ' ' + data[0].nom;
+        resultatCodePostal.innerText = resultatCodePostal.textContent + ' ' + data[0].nom;
     })
     .catch(error => {
         alert("Attention le code postale n'existe pas")

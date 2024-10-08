@@ -25,4 +25,15 @@ input {
 #loupeRecherche {
     padding-left: 5px;
     font-size: 25px;
-} 
+}
+
+#selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+select {
+    font-size: 25px;
+}
