@@ -1,6 +1,4 @@
 let resultatCodePostal = document.getElementById("resultatCodePostal")
-let resultatmeteoLatitude = document.getElementById("resultatmeteoLatitude")
-let resultatmeteoLontitude = document.getElementById("resultatmeteoLontitude")
 var zoneCodePostal = document.getElementById("zoneCodePostal");
 var str = ""
 var verifCaractere
@@ -8,6 +6,12 @@ var verifCaractere
 
 const token = "7098b091691f53b4ba9f102d5c8a5018c423a36c5eb9e5d061bcfc050d3b0e8b"
 let codeInsee
+let resultatmeteoLatitude = document.getElementById("resultatmeteoLatitude")
+let resultatmeteoLontitude = document.getElementById("resultatmeteoLontitude")
+let tempMax = document.getElementById("tempMax")
+let tempMin = document.getElementById("tempMin")
+let probaPluie = document.getElementById("probaPluie")
+let nbHensoleillement = document.getElementById("nbHensoleillement")
 
 console.log(str);
 zoneCodePostal.addEventListener("input", recherche);
@@ -23,7 +27,6 @@ function recherche(valeur){
         if (str.length == 5){
             afficheVille()
             getInsee()
-            afficheMeteo()
         }
         else{
             resultatCodePostal.innerText = "resultat :"
@@ -66,6 +69,8 @@ function getInsee(){
     })
     .then(data => {
         codeInsee = data.cities[0].insee
+        console.log(codeInsee)
+        afficheMeteo()
     })
     .catch(error => {
         alert("Attention insee bug")
@@ -73,7 +78,7 @@ function getInsee(){
 }
 
 function afficheMeteo(){
-    fetch("https://api.meteo-concept.com/api/forecast-day/1?token=" + token + "&insee=" + parseInt(codeInsee))
+    fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + parseInt(codeInsee))
     .then(reponse => {
     if(!reponse.ok){
         throw new Error("Network response was not ok");
@@ -82,6 +87,13 @@ function afficheMeteo(){
     })
     .then(data => {
         console.log(data);
+        resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
+        resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
+        tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
+        tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
+        probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
+        nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
+
     })
     .catch(error => {
         alert("Attention meteo bug")
