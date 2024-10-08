@@ -38,16 +38,12 @@ function afficheVille(){
     })
     .then(data => {
         selectionVilles.innerHTML = ""
-        console.log(data)
+        if(data.length <= 0){   
+            alert("Attention le code postale n'existe pas")
+        }
+        console.log(data[0].nom)
         for (i = 0; i < data.length; i++) {
             selectionVilles.innerHTML += "<button>" + data[i].nom +"</button>"
         }
-        if(data.length == 0){
-            alert("Attention le code postale n'existe pas")
-        }
-    })
-    .catch(error => {
-        console.log(10)
-        alert("Attention le code postale n'existe pas")
     });
 }
