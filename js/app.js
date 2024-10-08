@@ -1,19 +1,35 @@
 let resultatDepartement = document.getElementById("resultatDepartement")
-const zoneCodePostal = document.getElementById("zoneCodePostal");
-var str = "";
+var zoneCodePostal = document.getElementById("zoneCodePostal");
+var str = ""
+var verifCaractere
 console.log(str);
 zoneCodePostal.addEventListener("input", recherche);
 
 function recherche(valeur){
-    str = valeur.target.value;
-    console.log(str.length);
-    if (str.length == 5){
-        afficheVille()
+    verifCaractere = valeur.target.value
+    if (verifChiffre(verifCaractere.charCodeAt(verifCaractere.length -1)) == false){
+        var suprime =  zoneCodePostal.value.replace(/[^0-9\.]/g,'');
+        zoneCodePostal.value =  suprime.replace(/\./g,'');
     }
-    else{
-        resultatDepartement.innerText = "resultat :"
+    else {
+        str = verifCaractere
+        if (str.length == 5){
+            afficheVille()
+        }
+        else{
+            resultatDepartement.innerText = "resultat :"
+        }
     }
+    console.log(str.length)
 }
+
+function verifChiffre(chiffre){
+    if (chiffre >= 48 && chiffre <= 57){
+        return true
+    }
+    return false
+}
+
 function afficheVille(){
     fetch('https://geo.api.gouv.fr/communes?codePostal='+ parseInt(str))
     .then(reponse => {
@@ -27,6 +43,6 @@ function afficheVille(){
         resultatDepartement.innerText = resultatDepartement.textContent + ' ' + data[0].nom;
     })
     .catch(error => {
-        console.error("il y a un probleme")
+        alert("Attention le code postale n'existe pas")
     });
 }
