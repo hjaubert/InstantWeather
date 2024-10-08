@@ -22,5 +22,5 @@ Projet effectué dans le cadre d'un cours de Développement Web en BUT Informati
 ---
   ## 👨‍💻Auteurs :
 Gogo425 - Hugo JAUBERT, BUT Informatique, Promo 2023-2026, 2ème année, TD2.1  
-torivado - Julien MOISSON, BUT Informatique, Promo 2023-2026, 2ème année, TD2.2  
-Julien960 - Clément MAGANZA, BUT Informatique, Promo 2023-2026, 2ème année, TD2.2  
+torivado - Clément MAGANZA, BUT Informatique, Promo 2023-2026, 2ème année, TD2.2  
+Julien960 - Julien MOISSON, BUT Informatique, Promo 2023-2026, 2ème année, TD2.2  
