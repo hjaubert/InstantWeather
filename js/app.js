@@ -1,4 +1,4 @@
-let resultatCodePostal = document.getElementById("resultatCodePostal")
+const selectionVilles = document.getElementById("selection")
 var zoneCodePostal = document.getElementById("zoneCodePostal");
 var str = ""
 var verifCaractere
@@ -28,9 +28,6 @@ function recherche(valeur){
             afficheVille()
             getInsee()
         }
-        else{
-            resultatCodePostal.innerText = "resultat :"
-        }
     }
     console.log(str.length)
 }
@@ -51,11 +48,14 @@ function afficheVille(){
         return reponse.json();
     })
     .then(data => {
-        console.log(data);
-        resultatCodePostal.innerText = resultatCodePostal.textContent + ' ' + data[0].nom;
-    })
-    .catch(error => {
-        alert("Attention le code postale n'existe pas")
+        selectionVilles.innerHTML = ""
+        if(data.length <= 0){   
+            alert("Attention le code postale n'existe pas")
+        }
+        console.log(data[0].nom)
+        for (i = 0; i < data.length; i++) {
+            selectionVilles.innerHTML += "<button>" + data[i].nom +"</button>"
+        }
     });
 }
 
