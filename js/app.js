@@ -136,12 +136,12 @@ function afficheMeteo(){
     })
     .then(data => {
         console.log(data);
-        resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
-        resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
-        tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
-        tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
-        probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
-        nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
+        // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
+        // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
+        // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
+        // tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
+        // probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
+        // nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
 
     })
     .catch(error => {

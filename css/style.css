@@ -94,3 +94,10 @@ button {
 select {
     font-size: 25px;
 }
+
+#affichageInfosSupp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
