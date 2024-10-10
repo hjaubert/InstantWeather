@@ -46,6 +46,19 @@ input {
     height: 35vh;
 }
 
+.anim{
+    position: relative;
+    animation: trans 4s forwards;
+}
+@keyframes trans {
+    from {
+        left:100%;
+    }
+    to{
+        left: 0%;
+    }
+}
+
 .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
     font-size: 3vw;
 }

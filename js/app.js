@@ -48,6 +48,8 @@ function creationCarte(TypeCarte, valeur){
 
 }
 
+
+
 creationCarte(TypeCarte.Ensoleillement,6)
 creationCarte(TypeCarte.TMin, 6)
 creationCarte(TypeCarte.TMax, 12)
