@@ -8,7 +8,7 @@ const selectionVilles = document.getElementById("selection")
 var zoneCodePostal = document.getElementById("zoneCodePostal");
 var str = ""
 var verifCaractere
-
+let villeChoisie
 
 const token = "7098b091691f53b4ba9f102d5c8a5018c423a36c5eb9e5d061bcfc050d3b0e8b"
 let codeInsee
@@ -75,7 +75,6 @@ function recherche(valeur){
         str = verifCaractere
         if (str.length == 5){
             afficheVille()
-            getInsee()
         }
     }
     console.log(str.length)
@@ -103,13 +102,25 @@ function afficheVille(){
         }
         console.log(data[0].nom)
         for (i = 0; i < data.length; i++) {
-            selectionVilles.innerHTML += "<button>" + data[i].nom +"</button>"
+            selectionVilles.innerHTML += "<button class = 'villeChoisie' value = " + data[i].nom + ">" + data[i].nom +"</button>"
         }
+        
+        villeChoisie = document.querySelectorAll(".villeChoisie")
+
+        villeChoisie.forEach((bouton) => {
+            bouton.addEventListener('click', ()=> {
+                const valeur = bouton.value
+                console.log(valeur)
+                getInsee(valeur)
+            })
+            
+        });
     });
 }
 
-function getInsee(){
-    fetch("https://api.meteo-concept.com/api/location/cities?token=" + token + "&search=" + parseInt(str))
+function getInsee(nomVille){
+    console.log(nomVille)
+    fetch("https://api.meteo-concept.com/api/location/cities?token=" + token + "&search=" + nomVille)
     .then(reponse => {
     if(!reponse.ok){
         throw new Error("Network response was not ok");
@@ -136,12 +147,12 @@ function afficheMeteo(){
     })
     .then(data => {
         console.log(data);
-        // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
-        // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
-        // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
-        // tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
-        // probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
-        // nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
+        resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
+        resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
+        tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
+        tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
+        probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
+        nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
 
     })
     .catch(error => {
