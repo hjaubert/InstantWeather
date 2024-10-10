@@ -19,6 +19,7 @@ let tempMin = document.getElementById("tempMin")
 let probaPluie = document.getElementById("probaPluie")
 let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
+let titreVille = document.getElementById("titreVille")
 
 function creationCarte(TypeCarte, valeur){
     const template = document.getElementById("templateCarte")
@@ -112,6 +113,7 @@ function afficheVille(){
             bouton.addEventListener('click', ()=> {
                 selectionVilles.innerHTML = ""
                 afficheCartes.innerHTML = ""
+                titreVille.innerText = ""
                 const valeur = bouton.value
                 console.log(valeur)
                 getInsee(valeur)
@@ -133,6 +135,7 @@ function getInsee(nomVille){
     .then(data => {
         codeInsee = data.cities[0].insee
         console.log(codeInsee)
+        titreVille.innerText = nomVille
         afficheMeteo()
     })
     .catch(error => {

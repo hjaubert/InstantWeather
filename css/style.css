@@ -1,13 +1,22 @@
 body {
     background-color: antiquewhite;
+    overflow-x: hidden;
 }
 
 h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 70px;
-    padding-top: 20px;
+    font-size: 4.375em;
+    padding-top: 0.4em;
+}
+
+#titreVille {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2em;
+    text-decoration: underline;
 }
 
 #barreDeRecherche {
@@ -21,21 +30,16 @@ h1 {
 }
 
 input {
-    border-radius: 50px;
-    width: 400px;
-    height: 25px;
+    border-radius: 3.125em;
+    width: 26em;
+    height: 1.7em;
 }
-
-#loupeRecherche {
-    padding-left: 5px;
-    font-size: 25px;
-} 
 
 #listeCarte{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 100px;
+    margin: 3.125em;
 }
 
 .carte{
@@ -43,7 +47,7 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    margin: 1.25em;
     border: solid 5px black;
     border-radius: 10%;
     width: 15vw;
@@ -54,6 +58,7 @@ input {
     position: relative;
     animation: trans 4s forwards;
 }
+
 @keyframes trans {
     from {
         left:100%;
@@ -80,19 +85,20 @@ h3{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 10px;
     padding-top: 10px;
 }
 
-button {
-    width: 400px;
-    height: 25px;
-    border-radius: 50px;
+.villeChoisie {
+    width: 25em;
+    height: 1.6em;
+    border-radius: 3.2em;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 0.625em;
 }
 
 select {
-    font-size: 25px;
+    font-size: 1.6em;
 }
 
 #affichageInfosSupp {
@@ -100,4 +106,78 @@ select {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+@media screen and (min-width : 425px) and (max-width : 768px) {
+
+    h1 {
+        font-size: 3.4em;
+    }
+    
+    #listeCarte {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carte {
+        width: 25vh;
+    }
+
+    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
+        font-size: 5vh;
+    }
+
+    h2 {
+        font-size: 4vw;
+    }
+
+    h3 {
+        font-size: 4vw;
+    }
+
+}
+
+@media screen and (min-width : 320px) and (max-width : 425px) {
+    
+    h1 {
+        font-size: 2.7em;
+    }
+
+    input {
+        width: 20em;
+    }
+
+    #listeCarte {
+        flex-direction: column;
+    }
+
+    .carte {
+        width: 23vh;
+    }
+
+    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
+        font-size: 7vh;
+    }
+
+    h2 {
+        font-size: 6vw;
+    }
+
+    h3 {
+        font-size: 6vw;
+    }
+
+    #zoneCodePostal {
+        width: 20em;
+    }
+
+    .villeChoisie {
+        width: 20em;
+    }
+
+    #titreVille {
+        font-size: 1.7em;
+    }
+
 }
