@@ -16,6 +16,10 @@ h1 {
     align-items: center;
 }
 
+#inputRecherche {
+    position: relative;
+}
+
 input {
     border-radius: 50px;
     width: 400px;
@@ -69,4 +73,24 @@ h2{
 
 h3{
     font-size: 2vw;
+}
+
+#selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+button {
+    width: 400px;
+    height: 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+select {
+    font-size: 25px;
 }
