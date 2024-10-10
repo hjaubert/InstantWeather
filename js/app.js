@@ -8,7 +8,7 @@ const selectionVilles = document.getElementById("selection")
 var zoneCodePostal = document.getElementById("zoneCodePostal");
 var str = ""
 var verifCaractere
-
+let villeChoisie
 
 const token = "7098b091691f53b4ba9f102d5c8a5018c423a36c5eb9e5d061bcfc050d3b0e8b"
 let codeInsee
@@ -18,6 +18,7 @@ let tempMax = document.getElementById("tempMax")
 let tempMin = document.getElementById("tempMin")
 let probaPluie = document.getElementById("probaPluie")
 let nbHensoleillement = document.getElementById("nbHensoleillement")
+let afficheCartes = document.getElementById("listeCarte")
 
 function creationCarte(TypeCarte, valeur){
     const template = document.getElementById("templateCarte")
@@ -75,7 +76,6 @@ function recherche(valeur){
         str = verifCaractere
         if (str.length == 5){
             afficheVille()
-            getInsee()
         }
     }
     console.log(str.length)
@@ -103,13 +103,27 @@ function afficheVille(){
         }
         console.log(data[0].nom)
         for (i = 0; i < data.length; i++) {
-            selectionVilles.innerHTML += "<button>" + data[i].nom +"</button>"
+            selectionVilles.innerHTML += "<button class = 'villeChoisie' value = " + data[i].nom + ">" + data[i].nom +"</button>"
         }
+        
+        villeChoisie = document.querySelectorAll(".villeChoisie")
+
+        villeChoisie.forEach((bouton) => {
+            bouton.addEventListener('click', ()=> {
+                selectionVilles.innerHTML = ""
+                afficheCartes.innerHTML = ""
+                const valeur = bouton.value
+                console.log(valeur)
+                getInsee(valeur)
+            })
+            
+        });
     });
 }
 
-function getInsee(){
-    fetch("https://api.meteo-concept.com/api/location/cities?token=" + token + "&search=" + parseInt(str))
+function getInsee(nomVille){
+    console.log(nomVille)
+    fetch("https://api.meteo-concept.com/api/location/cities?token=" + token + "&search=" + nomVille)
     .then(reponse => {
     if(!reponse.ok){
         throw new Error("Network response was not ok");
@@ -136,6 +150,10 @@ function afficheMeteo(){
     })
     .then(data => {
         console.log(data);
+        creationCarte(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
+        creationCarte(TypeCarte.TMax,data.forecast[0].tmax)
+        creationCarte(TypeCarte.TMin,data.forecast[0].tmin)
+        creationCarte(TypeCarte.ProbaPluie,data.forecast[0].probarain)
         // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
         // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
         // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
