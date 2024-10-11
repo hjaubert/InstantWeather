@@ -102,23 +102,26 @@ function afficheVille(){
         if(data.length <= 0){   
             alert("Attention le code postale n'existe pas")
         }
-        console.log(data[0].nom)
-        for (i = 0; i < data.length; i++) {
-            selectionVilles.innerHTML += "<button class = 'villeChoisie' value = " + data[i].nom + ">" + data[i].nom +"</button>"
-        }
-        
-        villeChoisie = document.querySelectorAll(".villeChoisie")
+
+        data.forEach((commune) => {
+            if(commune.nom.includes("'")){
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= " + commune.nom + " >" + commune.nom + "</button>";
+            } else {
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= '" + commune.nom + "' >" + commune.nom + "</button>";
+            }
+        })
+
+        villeChoisie = document.querySelectorAll(".villeChoisie");
 
         villeChoisie.forEach((bouton) => {
-            bouton.addEventListener('click', ()=> {
-                selectionVilles.innerHTML = ""
-                afficheCartes.innerHTML = ""
-                titreVille.innerText = ""
-                const valeur = bouton.value
-                console.log(valeur)
-                getInsee(valeur)
-            })
-            
+            bouton.addEventListener('click', () => {
+                const valeur = bouton.value; // Décoder la valeur pour obtenir le vrai nom
+                console.log(valeur);
+                selectionVilles.innerHTML = "";
+                afficheCartes.innerHTML = "";
+                titreVille.innerText = "";
+                getInsee(valeur); // Appeler la fonction avec le nom décodé
+            });
         });
     });
 }
@@ -139,6 +142,7 @@ function getInsee(nomVille){
         afficheMeteo()
     })
     .catch(error => {
+        titreVille.innerText = ""
         alert("Attention insee bug")
     });
 }
@@ -168,4 +172,8 @@ function afficheMeteo(){
     .catch(error => {
         alert("Attention meteo bug")
     });
+}
+
+function enleverEspace(str){
+    return str.replace(/\s/g, "")
 }
