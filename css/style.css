@@ -129,16 +129,16 @@ select {
     }
 
     h2 {
-        font-size: 4vw;
+        font-size: 3vw;
     }
 
     h3 {
-        font-size: 4vw;
+        font-size: 3vw;
     }
 
 }
 
-@media screen and (min-width : 320px) and (max-width : 425px) {
+@media screen and (max-width : 426px) {
     
     h1 {
         font-size: 2.7em;
@@ -161,11 +161,11 @@ select {
     }
 
     h2 {
-        font-size: 6vw;
+        font-size: 5vw;
     }
 
     h3 {
-        font-size: 6vw;
+        font-size: 5vw;
     }
 
     #zoneCodePostal {
