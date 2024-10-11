@@ -102,55 +102,14 @@ function afficheVille(){
         if(data.length <= 0){   
             alert("Attention le code postale n'existe pas")
         }
-        // console.log(data)
-        // data.forEach((commune) => {
-        //     let nomOriginal = commune.nom
-        //     if(nomOriginal.includes("'")){
-        //         selectionVilles.innerHTML += `<button class='villeChoisie' value='${nomOriginal}' data-nomoriginal='${nomOriginal}'>${nomOriginal}</button>`;
-        //     }
-        //     let nomSansEspace = commune.nom.replace(/\s+/g, '');
-        //     selectionVilles.innerHTML += `<button class='villeChoisie' value='${nomSansEspace}' data-nomoriginal='${nomOriginal}'>${nomOriginal}</button>`;
-        //     console.log(nomSansEspace)
-        //     console.log(commune.nom)
-        // });
 
-        // villeChoisie = document.querySelectorAll(".villeChoisie");
-
-        // villeChoisie.forEach((bouton) => {
-        //     bouton.addEventListener('click', () => {
-        //         console.log(bouton.value)
-        //         console.log(bouton.dataset.nomoriginal)
-        //         const valeurSansEspace = bouton.value;  
-        //         const nomOriginal = bouton.dataset.nomoriginal;
-        //         console.log("Nom sans espaces : " + valeurSansEspace);
-        //         console.log("Nom original : " + nomOriginal);
-
-        //         selectionVilles.innerHTML = "";
-        //         afficheCartes.innerHTML = "";
-        //         titreVille.innerText = nomOriginal;  
-        //         getInsee(nomOriginal);
-        //     });
-        // });
-
-        // data.forEach((commune) => {
-        //     if(commune.nom.includes("'")){
-        //         selectionVilles.innerHTML += "<button class='villeChoisie' value='" + commune.nom + "'>" + commune.nom + "</button>";
-        //     }
-        //     // Encode le nom de la commune pour qu'il soit compatible avec les espaces
-        //     selectionVilles.innerHTML += "<button class='villeChoisie' value='" + encodeURIComponent(commune.nom) + "'>" + commune.nom + "</button>";
-        //     console.log(encodeURIComponent(commune.nom))
-        //     console.log(commune.nom)
-        //     console.log(commune.nom.includes("'"))
-        //     console.log(decodeURIComponent(commune.nom))
-        // });
-
-        for (i = 0; i < data.length; i++) {
-            if(data[i].nom.includes("'")){
-                selectionVilles.innerHTML += "<button class='villeChoisie' value= " + data[i].nom + " >" + data[i].nom + "</button>";
+        data.forEach((commune) => {
+            if(commune.nom.includes("'")){
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= " + commune.nom + " >" + commune.nom + "</button>";
             } else {
-                selectionVilles.innerHTML += "<button class='villeChoisie' value= '" + data[i].nom + "' >" + data[i].nom + "</button>";
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= '" + commune.nom + "' >" + commune.nom + "</button>";
             }
-        }
+        })
 
         villeChoisie = document.querySelectorAll(".villeChoisie");
 
