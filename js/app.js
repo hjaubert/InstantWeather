@@ -21,6 +21,38 @@ let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
+function changementFond(weatherCode){
+
+    const valeurSoleil = [0,1,2]
+    const valeurNuageux = [3,4,5]
+    const valeurPluie = [10,11,12,13,14,15,16,30,31,32,40,41,42,43,44,45,46,47,48,70,71,72,73,74,75,76,77,78,
+        140,141,210,211,212]
+    const valeurNeige = [20,21,22,60,61,62,63,64,65,66,67,68,142,220,221,222,230,231,232,233,234,235]
+    const valeurOrage = [100,101,102,103,104,105,106,107,108,120,121,122,123,124,125,126,127,128,130,131,132,133,
+        134,135,136,137,138]
+
+    if(valeurSoleil.includes(weatherCode)){
+        // fond soleil
+    }
+
+    if(valeurNuageux.includes(weatherCode)){
+        // fond nuageux
+    }
+
+    if(valeurPluie.includes(weatherCode)){
+        //fond pluie
+    }
+
+    if(valeurNeige.includes(weatherCode)){
+        //fond neige
+    }
+
+    if(valeurOrage.includes(weatherCode)){
+        //fond orage
+    }
+
+}
+
 function creationCarte(TypeCarte, valeur){
     const template = document.getElementById("templateCarte")
     let clone = document.importNode(template.content, true)
@@ -161,6 +193,7 @@ function afficheMeteo(){
         creationCarte(TypeCarte.TMax,data.forecast[0].tmax)
         creationCarte(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarte(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+        console.log(data.forecast[0].weather)
         // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
         // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
         // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
