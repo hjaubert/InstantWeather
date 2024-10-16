@@ -82,11 +82,10 @@ h3{
 
 #selection {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
     margin: auto;
     max-height: 205px;
+    overflow-block: scroll;
     overflow-y: scroll;
     width: max-content;
     margin-top: 10px;
