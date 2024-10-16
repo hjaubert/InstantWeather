@@ -21,6 +21,19 @@ let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
+
+let choixJour = document.getElementById("choixJour")
+let afficheJour = document.getElementById("afficheJour")
+let copieChoixJour = afficheJour.textContent
+choixJour.addEventListener('input', actualisetextJour)
+
+function actualisetextJour(){
+    afficheJour.innerText = copieChoixJour
+    afficheJour.innerText = afficheJour.textContent + choixJour.value
+}
+
+
+
 function creationCarte(TypeCarte, valeur){
     const template = document.getElementById("templateCarte")
     let clone = document.importNode(template.content, true)
