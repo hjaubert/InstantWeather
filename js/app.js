@@ -12,6 +12,9 @@ let villeChoisie
 
 const token = "7098b091691f53b4ba9f102d5c8a5018c423a36c5eb9e5d061bcfc050d3b0e8b"
 let codeInsee
+
+let body = document.body;
+let fond = document.getElementById("fond")
 let resultatmeteoLatitude = document.getElementById("resultatmeteoLatitude")
 let resultatmeteoLontitude = document.getElementById("resultatmeteoLontitude")
 let tempMax = document.getElementById("tempMax")
@@ -32,23 +35,54 @@ function changementFond(weatherCode){
         134,135,136,137,138]
 
     if(valeurSoleil.includes(weatherCode)){
-        // fond soleil
+        body.classList.remove("fondNuage")
+        body.classList.remove("fondPluie")
+        body.classList.remove("fondNeige")
+        body.classList.remove("fondOrage")
+        body.classList.remove("couleurPluie")
+        snow.init(0)
+        body.classList.add("fondSoleil")
     }
 
     if(valeurNuageux.includes(weatherCode)){
-        // fond nuageux
+        body.classList.remove("fondSoleil")
+        body.classList.remove("fondPluie")
+        body.classList.remove("fondNeige")
+        body.classList.remove("fondOrage")
+        body.classList.remove("couleurPluie")
+        snow.init(0)
+        body.classList.add("fondNuage")
     }
 
     if(valeurPluie.includes(weatherCode)){
-        //fond pluie
+        body.classList.remove("fondSoleil")
+        body.classList.remove("fondNuage")
+        body.classList.remove("fondNeige")
+        body.classList.remove("fondOrage")
+        snow.init(0)
+        body.classList.add("couleurPluie")
+        body.classList.add("fondPluie")
     }
 
     if(valeurNeige.includes(weatherCode)){
-        //fond neige
+        body.classList.remove("fondSoleil")
+        body.classList.remove("fondPluie")
+        body.classList.remove("fondNuage")
+        body.classList.remove("fondOrage")
+        body.classList.remove("couleurPluie")
+        snow.init(0)
+        body.classList.add("fondNeige")
+        snow.init(10);
     }
 
     if(valeurOrage.includes(weatherCode)){
-        //fond orage
+        body.classList.remove("fondSoleil")
+        body.classList.remove("fondPluie")
+        body.classList.remove("fondNuage")
+        body.classList.remove("fondNuage")
+        body.classList.remove("couleurPluie")
+        snow.init(0)
+        body.classList.add("fondOrage")
     }
 
 }
@@ -194,6 +228,7 @@ function afficheMeteo(){
         creationCarte(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarte(TypeCarte.ProbaPluie,data.forecast[0].probarain)
         console.log(data.forecast[0].weather)
+        changementFond(data.forecast[0].weather)
         // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
         // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
         // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
@@ -207,6 +242,91 @@ function afficheMeteo(){
     });
 }
 
-function enleverEspace(str){
-    return str.replace(/\s/g, "")
-}
+var snow = {
+
+    vent : 0,
+    etendueXmax : 100,
+    etendueXmin : 10,
+    vitesseMax : 2,
+    vitesseMin : 1,
+    couleur : "#fff",
+    caractere : "*",
+    tailleMax : 20,
+    tailleMin : 8,
+
+    flocons : [],
+    LARGEUR : 0,
+    TAILLE : 0,
+
+    init : function(nb){
+        var o = this,
+            frag = document.createDocumentFragment();
+        o.getSize();
+
+        
+
+        for(var i = 0; i < nb; i++){
+            var flocon = {
+                x : o.random(o.LARGEUR),
+                y : - o.tailleMax,
+                etendueX : o.etendueXmin + o.random(o.etendueXmax - o.etendueXmin),
+                vitesseY : o.vitesseMin + o.random(o.vitesseMax - o.vitesseMin, 100),
+                vie : 0,
+                taille : o.tailleMin + o.random(o.tailleMax - o.tailleMin),
+                html : document.createElement("span")
+            };
+
+            flocon.html.style.position = "absolute";
+            flocon.html.style.top = flocon.y + "px";
+            flocon.html.style.left = flocon.x + "px";
+            flocon.html.style.fontSize = flocon.taille + "px";
+            flocon.html.style.color = o.couleur;
+            flocon.html.appendChild(document.createTextNode(o.caractere));
+
+            frag.appendChild(flocon.html);
+            o.flocons.push(flocon);
+        }
+
+        document.body.appendChild(frag);
+        o.animate();
+        
+        window.onresize = function(){o.getSize();};
+    },
+
+    animate : function(){
+        var o = this;
+        for(var i = 0, c = o.flocons.length; i < c; i++){
+            var flocon = o.flocons[i],
+                haut = flocon.y + flocon.vitesseY,
+                gauche = flocon.x + Math.sin(flocon.vie) * flocon.etendueX + o.vent;
+            if(haut < o.TAILLE - flocon.taille - 10 && gauche < o.LARGEUR - flocon.taille && gauche > 0){
+                flocon.html.style.top = haut + "px";
+                flocon.html.style.left = gauche + "px";
+                flocon.y = haut;
+                flocon.x += o.vent;
+                flocon.vie+= .01;
+            }
+            else {
+                flocon.html.style.top = -o.tailleMax + "px";
+                flocon.x = o.random(o.LARGEUR);
+                flocon.y = -o.tailleMax;
+                flocon.html.style.left = flocon.x + "px";
+                flocon.vie = 0;
+            }
+        }
+        setTimeout(function(){
+            o.animate();
+        },20);
+    },
+
+    random : function(range, num){
+        var num = num?num:1;
+        return Math.floor(Math.random() * (range + 1) * num) / num;
+    },
+
+    getSize : function(){
+        this.LARGEUR = document.body.clientWidth || window.innerWidth;
+        this.TAILLE = document.body.clientHeight || window.innerHeight;
+    }
+
+};
