@@ -1,0 +1,73 @@
+@media screen and (min-width : 425px) and (max-width : 768px) {
+
+    h1 {
+        font-size: 3.4em;
+    }
+    
+    #listeCarte {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carte {
+        width: 25vh;
+    }
+
+    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
+        font-size: 5vh;
+    }
+
+    h2 {
+        font-size: 3vw;
+    }
+
+    h3 {
+        font-size: 3vw;
+    }
+
+}
+
+@media screen and (max-width : 426px) {
+    
+    h1 {
+        font-size: 13vw;
+    }
+
+    input {
+        width: 20vw;
+    }
+
+    #listeCarte {
+        flex-direction: column;
+    }
+
+    .carte {
+        width: 23vh;
+    }
+
+    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
+        font-size: 7vh;
+    }
+
+    h2 {
+        font-size: 5vw;
+    }
+
+    h3 {
+        font-size: 5vw;
+    }
+
+    #zoneCodePostal {
+        width: 80vw;
+    }
+
+    .villeChoisie {
+        width: 80vw;
+    }
+
+    #titreVille {
+        font-size: 1.7em;
+    }
+
+}

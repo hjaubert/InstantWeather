@@ -111,99 +111,25 @@ h3{
 select {
     font-size: 1.6em;
 }
-
-.fondNuage {
-    background-position: center;
-    animation: fondNuage 3s forwards;
-}
-
-@keyframes fondNuage {
-    50% {
-        background-color: whitesmoke;
-    } 100% {
-        background-image: url(../images/abstrait-nuage-fumee-blanche-doux-blanc-fumee-exploser-nuageux_1319560-33430.avif);
-    }
-}
-
-.fondPluie {
-    background-image: url(../images/rain.png);
-    animation: couleurPluie 5s forwards, pluie-anim 0.8s linear infinite;
-}
-
-@keyframes couleurPluie {
-    50% {
-        background-color: grey;
-    } 75% {
-        background-color: grey;
-    } 100% {
-        background-color: grey;
-    }
-}
-
-@keyframes pluie-anim {
-    from {
-        background-position: 20% 100%;
-    } to {
-        background-position: 0 0;
-    }
-}
-
-.fondSoleil {
-    animation: fondSoleil 10s forwards;
-}
-
-@keyframes fondSoleil {
-    50% {
-        background-color: lightblue;
-    }
-    75% {
-        background-color: lightblue;
-    }
-    100% {
-        background: linear-gradient(to bottom left, yellow, lightblue, lightblue, lightblue);
-    }
-}
-
-.fondOrage {
-    animation : fondOrage forwards;
-}
-
-@keyframes fondOrage {
-    100% {
-        background-image: url(../images/afaa766a55eb784a73149e9de9e7a612.jpeg);
-    }
-}
-
-.fondNeige {
-    animation: fondNeige 5s forwards;
-}
-
-@keyframes fondNeige {
-    50% {
-        background-color: lightslategray;
-    } 100% {
-        background-color: lightslategray;
-    }
-}
 /*****************************************************************************/
 
- /* The switch - the box around the slider */
- .switch {
+/* The switch - the box around the slider */
+.switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
+}
+
+/* Hide default HTML checkbox */
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider */
-  .slider {
+}
+
+/* The slider */
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -213,9 +139,9 @@ select {
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -225,101 +151,27 @@ select {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .slider {
+}
+
+input:checked + .slider {
     background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  } 
-
-@media screen and (min-width : 425px) and (max-width : 768px) {
-
-    h1 {
-        font-size: 3.4em;
-    }
-    
-    #listeCarte {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .carte {
-        width: 25vh;
-    }
-
-    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
-        font-size: 5vh;
-    }
-
-    h2 {
-        font-size: 3vw;
-    }
-
-    h3 {
-        font-size: 3vw;
-    }
-
 }
 
-@media screen and (max-width : 426px) {
-    
-    h1 {
-        font-size: 13vw;
-    }
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
 
-    input {
-        width: 20vw;
-    }
-
-    #listeCarte {
-        flex-direction: column;
-    }
-
-    .carte {
-        width: 23vh;
-    }
-
-    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
-        font-size: 7vh;
-    }
-
-    h2 {
-        font-size: 5vw;
-    }
-
-    h3 {
-        font-size: 5vw;
-    }
-
-    #zoneCodePostal {
-        width: 80vw;
-    }
-
-    .villeChoisie {
-        width: 80vw;
-    }
-
-    #titreVille {
-        font-size: 1.7em;
-    }
-
+.slider.round:before {
+    border-radius: 50%;
 }

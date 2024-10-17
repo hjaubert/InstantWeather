@@ -142,7 +142,6 @@ function chargeParametre(){
         window.localStorage.setItem("ValeurJour",1)
         nbjour = 1;
     }
-    console.log(window.localStorage.getItem("ValeurJour"))
     changeLatitude.checked = validee(window.localStorage.getItem("ValeurLatitude"))
     changeLongitude.checked = validee(window.localStorage.getItem("ValeurLongitude"))
     changeCumulPluie.checked = validee(window.localStorage.getItem("ValeurCumulPluie"))
@@ -215,7 +214,6 @@ function creationCarte(TypeCarte, valeur){
 
 }
 
-console.log(str);
 zoneCodePostal.addEventListener("input", recherche);
 
 function recherche(valeur){
@@ -230,7 +228,6 @@ function recherche(valeur){
             afficheVille()
         }
     }
-    console.log(str.length)
 }
 
 function verifChiffre(chiffre){
@@ -267,7 +264,6 @@ function afficheVille(){
         villeChoisie.forEach((bouton) => {
             bouton.addEventListener('click', () => {
                 const valeur = bouton.value; // Décoder la valeur pour obtenir le vrai nom
-                console.log(valeur);
                 selectionVilles.innerHTML = "";
                 afficheCartes.innerHTML = "";
                 titreVille.innerText = "";
@@ -278,7 +274,6 @@ function afficheVille(){
 }
 
 function getInsee(nomVille){
-    console.log(nomVille)
     fetch("https://api.meteo-concept.com/api/location/cities?token=" + token + "&search=" + nomVille)
     .then(reponse => {
     if(!reponse.ok){
@@ -288,7 +283,6 @@ function getInsee(nomVille){
     })
     .then(data => {
         codeInsee = data.cities[0].insee
-        console.log(codeInsee)
         titreVille.innerText = nomVille
         afficheMeteo()
     })
@@ -307,19 +301,11 @@ function afficheMeteo(){
         return reponse.json();
     })
     .then(data => {
-        console.log(data);
         creationCarte(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
         creationCarte(TypeCarte.TMax,data.forecast[0].tmax)
         creationCarte(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarte(TypeCarte.ProbaPluie,data.forecast[0].probarain)
-        console.log(data.forecast[0].weather)
         changementFond(data.forecast[0].weather)
-        // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
-        // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
-        // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
-        // tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
-        // probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
-        // nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
 
     })
     .catch(error => {

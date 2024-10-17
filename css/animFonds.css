@@ -1,0 +1,73 @@
+.fondNuage {
+    background-position: center;
+    animation: fondNuage 3s forwards;
+}
+
+@keyframes fondNuage {
+    50% {
+        background-color: whitesmoke;
+    } 100% {
+        background-image: url(../images/abstrait-nuage-fumee-blanche-doux-blanc-fumee-exploser-nuageux_1319560-33430.avif);
+    }
+}
+
+.fondPluie {
+    background-image: url(../images/rain.png);
+    animation: couleurPluie 5s forwards, pluie-anim 0.8s linear infinite;
+}
+
+@keyframes couleurPluie {
+    50% {
+        background-color: grey;
+    } 75% {
+        background-color: grey;
+    } 100% {
+        background-color: grey;
+    }
+}
+
+@keyframes pluie-anim {
+    from {
+        background-position: 20% 100%;
+    } to {
+        background-position: 0 0;
+    }
+}
+
+.fondSoleil {
+    animation: fondSoleil 10s forwards;
+}
+
+@keyframes fondSoleil {
+    50% {
+        background-color: lightblue;
+    }
+    75% {
+        background-color: lightblue;
+    }
+    100% {
+        background: linear-gradient(to bottom left, yellow, lightblue, lightblue, lightblue);
+    }
+}
+
+.fondOrage {
+    animation : fondOrage forwards;
+}
+
+@keyframes fondOrage {
+    100% {
+        background-image: url(../images/afaa766a55eb784a73149e9de9e7a612.jpeg);
+    }
+}
+
+.fondNeige {
+    animation: fondNeige 5s forwards;
+}
+
+@keyframes fondNeige {
+    50% {
+        background-color: lightslategray;
+    } 100% {
+        background-color: lightslategray;
+    }
+}
