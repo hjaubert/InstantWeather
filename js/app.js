@@ -7,10 +7,9 @@ const TypeCarte = {
 
 var latitude = false;
 var longitude = false;
-var cumulPlui = false;
-var latitude = false;
-var moyVent = false;
-var directionVent = false;
+var cumulPlui = true;
+var moyVent = true;
+var directionVent = true;
 var nbjour = 7;
 
 
@@ -23,12 +22,6 @@ let villeChoisie
 
 const token = "7098b091691f53b4ba9f102d5c8a5018c423a36c5eb9e5d061bcfc050d3b0e8b"
 let codeInsee
-let resultatmeteoLatitude = document.getElementById("resultatmeteoLatitude")
-let resultatmeteoLontitude = document.getElementById("resultatmeteoLontitude")
-let tempMax = document.getElementById("tempMax")
-let tempMin = document.getElementById("tempMin")
-let probaPluie = document.getElementById("probaPluie")
-let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
@@ -126,13 +119,6 @@ function afficheMeteo(){
     .then(data => {
         console.log(data);
         creationCarte(data)
-        // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
-        // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
-        // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
-        // tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
-        // probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
-        // nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
-
     })
     .catch(error => {
         alert("Attention meteo bug")
@@ -210,11 +196,29 @@ function creationCarteV2(data){
             h4[0].textContent = jours[(date.getDay() + i)%7]            
         }
 
-        let h5 = clone.querySelectorAll("h5")
-        h5[0].textContent = data.forecast[i].sun_hours + " h"
-        h5[1].textContent = data.forecast[i].tmax + " °C"
-        h5[2].textContent = data.forecast[i].tmin + " °C"
-        h5[3].textContent = data.forecast[i].probarain + " %"
+        let h3 = clone.querySelectorAll("h3")
+        h3[0].textContent = data.forecast[i].sun_hours + " h"
+        h3[1].textContent = data.forecast[i].tmax + " °C"
+        h3[2].textContent = data.forecast[i].tmin + " °C"
+        h3[3].textContent = data.forecast[i].probarain + " %"
+
+        let span = clone.querySelectorAll("span")
+
+        if(cumulPlui == true){
+            console.log("cc")
+            span[4].classList.add("fa-solid", "fa-vial")
+            h3[4].textContent = data.forecast[i].rr10 + " mm"
+        }
+
+        if(moyVent == true){
+            span[5].classList.add("fa-solid", "fa-wind")
+            h3[5].textContent = data.forecast[i].wind10m + " km/h"
+        }
+
+        if(directionVent == true){
+            span[6].classList.add("fa-solid", "fa-compass")
+            h3[6].textContent = data.forecast[i].dirwind10m + " °"
+        }
         
         divCarte.appendChild(clone)
     }
