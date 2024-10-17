@@ -98,7 +98,6 @@ function getInsee(nomVille){
     })
     .then(data => {
         codeInsee = data.cities[0].insee
-        console.log(codeInsee)
         titreVille.innerText = nomVille
         afficheMeteo()
     })
@@ -185,7 +184,7 @@ var date = new Date()
 function creationCarteV2(data){
 
     for (let i = 0; i < nbjour; i++){
-        let divCarte = document.querySelector("#listeCarte")
+        let divCarte = document.querySelector("#listeCarteV2")
         const template = document.getElementById("templateCarteV2")
         let clone = document.importNode(template.content, true)
     
