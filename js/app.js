@@ -11,7 +11,7 @@ var cumulPlui = false;
 var latitude = false;
 var moyVent = false;
 var directionVent = false;
-var nbjour = 1;
+var nbjour = 7;
 
 
 
@@ -197,24 +197,28 @@ const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 var date = new Date()
 
 function creationCarteV2(data){
-    
 
-    for (let i = 1; i < nbjour; i++){
+    for (let i = 0; i < nbjour; i++){
+        let divCarte = document.querySelector("#listeCarte")
         const template = document.getElementById("templateCarteV2")
         let clone = document.importNode(template.content, true)
     
         let h4 = clone.querySelectorAll("h4")
-        if(i == 1){
+        if(i == 0){
             h4[0].textContent = "Aujourd'hui"
         }else {
-            h4[0].textContent = jours[date.getDay() + i]
+            h4[0].textContent = jours[(date.getDay() + i)%7]
+            
+            
         }
 
-
-
-        let h5 = clone.querySelectorAll("h5")
-
-
+        
+        divCarte.appendChild(clone)
     }
 }
 
+function jourSuivant(nJour){
+    if(nJour > 6){
+        return 
+    }
+}
