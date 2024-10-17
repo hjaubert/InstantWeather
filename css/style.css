@@ -117,19 +117,90 @@ select {
     justify-content: flex-end;
     font-size: 3vw;
     margin: 20px;
+    cursor: pointer;
+    /* animation: boutonParam 1s ease-in forwards; */
+}
+
+#boutonAnnuler, #boutonValider {
+    font-size: 3vw;
+}
+
+#boutonAnnuler {
+    color: red;
+}
+
+#boutonValider {
+    color: green;
 }
 
 #pageParametres {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
-    background-color: red;
+    background-color: lightslategray;
     display: flex;
     flex-direction: column;
     width: 50%;
     height: 100%;
+    right: -100%;
     top: 0;
-    right: 0;
     z-index: 1;
+}
+
+.choixParametres {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.choixParametres p {
+    display: flex;
+    align-self: center;
+    padding-right: 5px;
+    font-size: 1.1em;
+}
+
+#pageParametres h1 {
+    text-decoration: underline;
+    font-size: 3em;
+}
+
+#parametres {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+#ValiderAnnuler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.apparitionPageParam {
+    animation: apparitionPageParam 2s forwards;
+}
+
+.disparitionPageParam {
+    animation: disparitionPageParam 2s forwards;
+}
+
+@keyframes apparitionPageParam {
+    from {
+        right: -100%;
+    } to {
+        right: 0;
+    }
+}
+
+@keyframes disparitionPageParam {
+    from {
+        right: 0;
+    } to {
+        right: -100%;
+    }
 }
 
 /*****************************************************************************/
