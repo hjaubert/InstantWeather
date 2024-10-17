@@ -4,6 +4,17 @@ const TypeCarte = {
     Ensoleillement: "Ensoleillement",
     ProbaPluie: "Proba pluie"
 }
+
+var latitude = false;
+var longitude = false;
+var cumulPlui = false;
+var latitude = false;
+var moyVent = false;
+var directionVent = false;
+var nbjour = 1;
+
+
+
 const selectionVilles = document.getElementById("selection")
 var zoneCodePostal = document.getElementById("zoneCodePostal");
 var str = ""
@@ -21,7 +32,7 @@ let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
-function creationCarte(TypeCarte, valeur){
+function creationCarteV1(TypeCarte, valeur){
     const template = document.getElementById("templateCarte")
     let clone = document.importNode(template.content, true)
 
@@ -157,10 +168,7 @@ function afficheMeteo(){
     })
     .then(data => {
         console.log(data);
-        creationCarte(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
-        creationCarte(TypeCarte.TMax,data.forecast[0].tmax)
-        creationCarte(TypeCarte.TMin,data.forecast[0].tmin)
-        creationCarte(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+        creationCarte(data)
         // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
         // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
         // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
@@ -176,4 +184,13 @@ function afficheMeteo(){
 
 function enleverEspace(str){
     return str.replace(/\s/g, "")
+}
+
+function creationCarte(data){
+    if(nbjour = 1){
+        creationCarteV1(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
+        creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
+        creationCarteV1(TypeCarte.TMin,data.forecast[0].tmin)
+        creationCarteV1(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+    }
 }
