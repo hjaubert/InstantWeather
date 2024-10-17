@@ -61,32 +61,42 @@ input {
 
 /************************modife pour carte v2**********************************/
 
-#element{
+
+#listeCarteV2{
     display: flex;
-    flex-direction: row;
-    
+    flex-direction: column;
+    align-items: center;
 }
+
 
 .carteV2{
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.carteV2CoteCote{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px;
+    border: solid 0.6vw black;
+    border-radius: 3vw;
+    margin: 1vh;
+    padding: 1% 1% 2%;
 }
 
 h4{
-    font-size: 2vw;
+    font-size: 2.5vw;
+    margin: 0;
+    padding: 0;
 }
 
-#listeCarteV2{
+#element{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+p{
+    font-size: 2.5vw;
+    font-weight: bold;
+    white-space: nowrap;
+    margin: 1.5vw 2vw 1.5vw 1vw;
 }
 
 /************************ fin modife pour carte v2**********************************/
@@ -161,7 +171,7 @@ select {
     }
 
     .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
-        font-size: 5vh;
+        font-size: 5vw;
     }
 
     h2 {
@@ -193,7 +203,7 @@ select {
     }
 
     .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
-        font-size: 7vh;
+        font-size: 6vw;
     }
 
     h2 {

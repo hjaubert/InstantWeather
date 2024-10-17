@@ -23,6 +23,7 @@ let villeChoisie
 const token = "71f59f4e95789089e978421273a728812bbff1652370a69215bd899c8e1ec117"
 
 let afficheCartes = document.getElementById("listeCarte")
+let afficheCartesV2 = document.getElementById("listeCarteV2")
 let titreVille = document.getElementById("titreVille")
 
 zoneCodePostal.addEventListener("input", recherche);
@@ -75,6 +76,7 @@ function afficheVille(){
             bouton.addEventListener('click', () => {
                 selectionVilles.innerHTML = "";
                 afficheCartes.innerHTML = "";
+                afficheCartesV2.innerHTML = "";
                 titreVille.innerText = "";
                 titreVille.innerText = bouton.textContent
                 afficheMeteo(bouton.value)
@@ -170,27 +172,27 @@ function creationCarteV2(data){
             h4[0].textContent = jours[(date.getDay() + i)%7]            
         }
 
-        let h3 = clone.querySelectorAll("h3")
-        h3[0].textContent = data.forecast[i].sun_hours + " h"
-        h3[1].textContent = data.forecast[i].tmax + " °C"
-        h3[2].textContent = data.forecast[i].tmin + " °C"
-        h3[3].textContent = data.forecast[i].probarain + " %"
+        let p = clone.querySelectorAll("p")
+        p[0].textContent = data.forecast[i].sun_hours + " h"
+        p[1].textContent = data.forecast[i].tmax + " °C"
+        p[2].textContent = data.forecast[i].tmin + " °C"
+        p[3].textContent = data.forecast[i].probarain + " %"
 
         let span = clone.querySelectorAll("span")
 
         if(cumulPlui == true){
             span[4].classList.add("fa-solid", "fa-vial")
-            h3[4].textContent = data.forecast[i].rr10 + " mm"
+            p[4].textContent = data.forecast[i].rr10 + " mm"
         }
 
         if(moyVent == true){
             span[5].classList.add("fa-solid", "fa-wind")
-            h3[5].textContent = data.forecast[i].wind10m + " km/h"
+            p[5].textContent = data.forecast[i].wind10m + " km/h"
         }
 
         if(directionVent == true){
             span[6].classList.add("fa-solid", "fa-compass")
-            h3[6].textContent = data.forecast[i].dirwind10m + " °"
+            p[6].textContent = data.forecast[i].dirwind10m + " °"
         }
         
         divCarte.appendChild(clone)
