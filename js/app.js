@@ -74,6 +74,7 @@ function afficheVille(){
 
         villeChoisie.forEach((bouton) => {
             bouton.addEventListener('click', () => {
+                zoneCodePostal.value = "";
                 selectionVilles.innerHTML = "";
                 afficheCartes.innerHTML = "";
                 afficheCartesV2.innerHTML = "";
