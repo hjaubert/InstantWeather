@@ -20,8 +20,8 @@ var str = ""
 var verifCaractere
 let villeChoisie
 
-const token = "7098b091691f53b4ba9f102d5c8a5018c423a36c5eb9e5d061bcfc050d3b0e8b"
-let codeInsee
+const token = "71f59f4e95789089e978421273a728812bbff1652370a69215bd899c8e1ec117"
+
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
@@ -63,12 +63,12 @@ function afficheVille(){
         if(data.length <= 0){   
             alert("Attention le code postale n'existe pas")
         }
-
+        console.log(data)
         data.forEach((commune) => {
             if(commune.nom.includes("'")){
-                selectionVilles.innerHTML += "<button class='villeChoisie' value= " + commune.nom + " >" + commune.nom + "</button>";
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= " + commune.code + " >" + commune.nom + "</button>";
             } else {
-                selectionVilles.innerHTML += "<button class='villeChoisie' value= '" + commune.nom + "' >" + commune.nom + "</button>";
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= '" + commune.code + "' >" + commune.nom + "</button>";
             }
         })
 
@@ -76,39 +76,19 @@ function afficheVille(){
 
         villeChoisie.forEach((bouton) => {
             bouton.addEventListener('click', () => {
-                const valeur = bouton.value; // Décoder la valeur pour obtenir le vrai nom
-                console.log(valeur);
                 selectionVilles.innerHTML = "";
                 afficheCartes.innerHTML = "";
                 titreVille.innerText = "";
-                getInsee(valeur); // Appeler la fonction avec le nom décodé
+                titreVille.innerText = bouton.textContent
+                afficheMeteo(bouton.value)
             });
         });
     });
 }
 
-function getInsee(nomVille){
-    console.log(nomVille)
-    fetch("https://api.meteo-concept.com/api/location/cities?token=" + token + "&search=" + nomVille)
-    .then(reponse => {
-    if(!reponse.ok){
-        throw new Error("Network response was not ok");
-    }
-        return reponse.json();
-    })
-    .then(data => {
-        codeInsee = data.cities[0].insee
-        titreVille.innerText = nomVille
-        afficheMeteo()
-    })
-    .catch(error => {
-        titreVille.innerText = ""
-        alert("Attention insee bug")
-    });
-}
-
-function afficheMeteo(){
-    fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + parseInt(codeInsee))
+function afficheMeteo(code){
+    console.log("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + code)
+    fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + code)
     .then(reponse => {
     if(!reponse.ok){
         throw new Error("Network response was not ok");
