@@ -24,21 +24,6 @@ let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
-let choixJour = document.getElementById("choixJour")
-let afficheJour = document.getElementById("afficheJour")
-let changeLatitude = document.getElementById("changeLatitude")
-let changeLongitude = document.getElementById("changeLongitude")
-let changeCumulPluie = document.getElementById("changeCumulPluie")
-let changeVentMoyen = document.getElementById("changeVentMoyen")
-let changeDirectionVent = document.getElementById("changeDirectionVent")
-let bouttonValide = document.getElementById("bouttonValide")
-bouttonValide.addEventListener("click", changeOption);
-let bouttonAnnule = document.getElementById("bouttonAnnule")
-bouttonAnnule.addEventListener("click", afficheParamere);
-let bouttonParamétre = document.getElementById("bouttonParamétre")
-bouttonParamétre.addEventListener("click", chargeParametre);
-let copieChoixJour = afficheJour.textContent
-
 function changementFond(weatherCode){
 
     const valeurSoleil = [0,1,2]
@@ -100,75 +85,6 @@ function changementFond(weatherCode){
         body.classList.add("fondOrage")
     }
 
-}
-
-function actualisetextJour(){
-    afficheJour.innerText = copieChoixJour
-    afficheJour.innerText = afficheJour.textContent + choixJour.value
-}
-
-function changeOption(){
-    window.localStorage.setItem("ValeurLatitude",changeLatitude.checked ) 
-    window.localStorage.setItem("ValeurLongitude",changeLongitude.checked )
-    window.localStorage.setItem("ValeurCumulPluie",changeCumulPluie.checked )
-    window.localStorage.setItem("ValeuVentMoyen",changeVentMoyen.checked )
-    window.localStorage.setItem("ValeurDirectionVent",changeDirectionVent.checked )
-    window.localStorage.setItem("ValeurJour",choixJour.value )
-    chargeVariableLocal()
-}
-
-function chargeParametre(){
-    if (window.localStorage.getItem("ValeurLatitude") == null){
-        window.localStorage.setItem("ValeurLatitude",false )
-        latitude = false
-    }
-    if (window.localStorage.getItem("ValeurLongitude") == null){
-        window.localStorage.setItem("ValeurLongitude",false )
-        longitude = false
-    }
-    if (window.localStorage.getItem("ValeurCumulPluie") == null){
-        window.localStorage.setItem("ValeurCumulPluie",false )
-        cumulPlui = false
-    }
-    if (window.localStorage.getItem("ValeuVentMoyen") == null){
-        window.localStorage.setItem("ValeuVentMoyen",false )
-        moyVent = false
-    }
-    if (window.localStorage.getItem("ValeurDirectionVent") == null){
-        window.localStorage.setItem("ValeurDirectionVent",false )
-        directionVent = false
-    }
-    if (window.localStorage.getItem("ValeurJour") == null){
-        window.localStorage.setItem("ValeurJour",1)
-        nbjour = 1;
-    }
-    changeLatitude.checked = validee(window.localStorage.getItem("ValeurLatitude"))
-    changeLongitude.checked = validee(window.localStorage.getItem("ValeurLongitude"))
-    changeCumulPluie.checked = validee(window.localStorage.getItem("ValeurCumulPluie"))
-    changeVentMoyen.checked = validee(window.localStorage.getItem("ValeuVentMoyen"))
-    changeDirectionVent.checked = validee(window.localStorage.getItem("ValeurDirectionVent"))
-    choixJour.value = window.localStorage.getItem("ValeurJour")
-    chargeVariableLocal()
-}
-
-function chargeVariableLocal(){
-    latitude = validee(window.localStorage.getItem("ValeurLatitude"))
-    longitude = validee(window.localStorage.getItem("ValeurLongitude"))
-    cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
-    moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
-    directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
-    nbjour =  window.localStorage.getItem("ValeurJour")
-}
-
-function afficheParamere(){
-    alert("a faire")
-}
-
-function validee(valeur){
-    if (valeur == "true"){
-        return true
-    }
-    return false
 }
 
 function creationCarte(TypeCarte, valeur){
@@ -306,6 +222,12 @@ function afficheMeteo(){
         creationCarte(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarte(TypeCarte.ProbaPluie,data.forecast[0].probarain)
         changementFond(data.forecast[0].weather)
+        // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
+        // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
+        // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
+        // tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
+        // probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
+        // nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
 
     })
     .catch(error => {
