@@ -16,13 +16,36 @@
     </header>
     <main>
         <div>
+            <input type="button" id="bouttonParamétre" value="Paramétre" />
+
             <input type="range" id="choixJour" min="1" max="7" value="1" />
             <label for="volume" id="afficheJour">nb jour affichée : </label>
+            <br>
 
             <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
+                <input type="checkbox" id="changeLatitude">
+                <span class="slider round" id="ChoixLatitude"></span>                
             </label>
+            <label class="switch">
+                <input type="checkbox" id="changeLongitude">
+                <span class="slider round" id="ChoixLongitude"></span>                
+            </label>
+            <label class="switch">
+                <input type="checkbox" id="changeCumulPluie">
+                <span class="slider round" id="ChoixCumulPluie"></span>                
+            </label>
+            <label class="switch">
+                <input type="checkbox" id="changeVentMoyen">
+                <span class="slider round" id="ChoixVentMoyen"></span>                
+            </label>
+            <label class="switch">
+                <input type="checkbox" id="changeDirectionVent">
+                <span class="slider round" id="ChoixDirectionVent"></span>                
+            </label>
+
+            <input type="button" id="bouttonValide" value="Validée" />
+
+            <input type="button" id="bouttonAnnule" value="Annuée" />
         </div>
 
 

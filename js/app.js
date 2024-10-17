@@ -24,12 +24,87 @@ let titreVille = document.getElementById("titreVille")
 
 let choixJour = document.getElementById("choixJour")
 let afficheJour = document.getElementById("afficheJour")
+let changeLatitude = document.getElementById("changeLatitude")
+let changeLongitude = document.getElementById("changeLongitude")
+let changeCumulPluie = document.getElementById("changeCumulPluie")
+let changeVentMoyen = document.getElementById("changeVentMoyen")
+let changeDirectionVent = document.getElementById("changeDirectionVent")
+let bouttonValide = document.getElementById("bouttonValide")
+bouttonValide.addEventListener("click", changeOption);
+let bouttonAnnule = document.getElementById("bouttonAnnule")
+bouttonAnnule.addEventListener("click", afficheParamere);
+let bouttonParamétre = document.getElementById("bouttonParamétre")
+bouttonParamétre.addEventListener("click", chargeParametre);
 let copieChoixJour = afficheJour.textContent
-choixJour.addEventListener('input', actualisetextJour)
 
 function actualisetextJour(){
     afficheJour.innerText = copieChoixJour
     afficheJour.innerText = afficheJour.textContent + choixJour.value
+}
+
+function changeOption(){
+    window.localStorage.setItem("ValeurLatitude",changeLatitude.checked ) 
+    window.localStorage.setItem("ValeurLongitude",changeLongitude.checked )
+    window.localStorage.setItem("ValeurCumulPluie",changeCumulPluie.checked )
+    window.localStorage.setItem("ValeuVentMoyen",changeVentMoyen.checked )
+    window.localStorage.setItem("ValeurDirectionVent",changeDirectionVent.checked )
+    window.localStorage.setItem("ValeurJour",choixJour.value )
+    chargeVariableLocal()
+}
+
+function chargeParametre(){
+    if (window.localStorage.getItem("ValeurLatitude") == null){
+        window.localStorage.setItem("ValeurLatitude",false )
+        latitude = false
+    }
+    if (window.localStorage.getItem("ValeurLongitude") == null){
+        window.localStorage.setItem("ValeurLongitude",false )
+        longitude = false
+    }
+    if (window.localStorage.getItem("ValeurCumulPluie") == null){
+        window.localStorage.setItem("ValeurCumulPluie",false )
+        cumulPlui = false
+    }
+    if (window.localStorage.getItem("ValeuVentMoyen") == null){
+        window.localStorage.setItem("ValeuVentMoyen",false )
+        moyVent = false
+    }
+    if (window.localStorage.getItem("ValeurDirectionVent") == null){
+        window.localStorage.setItem("ValeurDirectionVent",false )
+        directionVent = false
+    }
+    if (window.localStorage.getItem("ValeurJour") == null){
+        window.localStorage.setItem("ValeurJour",1)
+        nbjour = 1;
+    }
+    console.log(window.localStorage.getItem("ValeurJour"))
+    changeLatitude.checked = validee(window.localStorage.getItem("ValeurLatitude"))
+    changeLongitude.checked = validee(window.localStorage.getItem("ValeurLongitude"))
+    changeCumulPluie.checked = validee(window.localStorage.getItem("ValeurCumulPluie"))
+    changeVentMoyen.checked = validee(window.localStorage.getItem("ValeuVentMoyen"))
+    changeDirectionVent.checked = validee(window.localStorage.getItem("ValeurDirectionVent"))
+    choixJour.value = window.localStorage.getItem("ValeurJour")
+    chargeVariableLocal()
+}
+
+function chargeVariableLocal(){
+    latitude = validee(window.localStorage.getItem("ValeurLatitude"))
+    longitude = validee(window.localStorage.getItem("ValeurLongitude"))
+    cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
+    moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
+    directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
+    nbjour =  window.localStorage.getItem("ValeurJour")
+}
+
+function afficheParamere(){
+    alert("a faire")
+}
+
+function validee(valeur){
+    if (valeur == "true"){
+        return true
+    }
+    return false
 }
 
 
