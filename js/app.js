@@ -207,18 +207,15 @@ function creationCarteV2(data){
         if(i == 0){
             h4[0].textContent = "Aujourd'hui"
         }else {
-            h4[0].textContent = jours[(date.getDay() + i)%7]
-            
-            
+            h4[0].textContent = jours[(date.getDay() + i)%7]            
         }
 
+        let h5 = clone.querySelectorAll("h5")
+        h5[0].textContent = data.forecast[i].sun_hours + " h"
+        h5[1].textContent = data.forecast[i].tmax + " °C"
+        h5[2].textContent = data.forecast[i].tmin + " °C"
+        h5[3].textContent = data.forecast[i].probarain + " %"
         
         divCarte.appendChild(clone)
-    }
-}
-
-function jourSuivant(nJour){
-    if(nJour > 6){
-        return 
     }
 }
