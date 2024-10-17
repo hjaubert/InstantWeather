@@ -25,7 +25,6 @@ const token = "71f59f4e95789089e978421273a728812bbff1652370a69215bd899c8e1ec117"
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
-console.log(str);
 zoneCodePostal.addEventListener("input", recherche);
 
 function recherche(valeur){
@@ -40,7 +39,6 @@ function recherche(valeur){
             afficheVille()
         }
     }
-    console.log(str.length)
 }
 
 function verifChiffre(chiffre){
@@ -63,7 +61,6 @@ function afficheVille(){
         if(data.length <= 0){   
             alert("Attention le code postale n'existe pas")
         }
-        console.log(data)
         data.forEach((commune) => {
             if(commune.nom.includes("'")){
                 selectionVilles.innerHTML += "<button class='villeChoisie' value= " + commune.code + " >" + commune.nom + "</button>";
@@ -87,7 +84,6 @@ function afficheVille(){
 }
 
 function afficheMeteo(code){
-    console.log("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + code)
     fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + code)
     .then(reponse => {
     if(!reponse.ok){
@@ -96,7 +92,6 @@ function afficheMeteo(code){
         return reponse.json();
     })
     .then(data => {
-        console.log(data);
         creationCarte(data)
     })
     .catch(error => {
@@ -184,7 +179,6 @@ function creationCarteV2(data){
         let span = clone.querySelectorAll("span")
 
         if(cumulPlui == true){
-            console.log("cc")
             span[4].classList.add("fa-solid", "fa-vial")
             h3[4].textContent = data.forecast[i].rr10 + " mm"
         }
