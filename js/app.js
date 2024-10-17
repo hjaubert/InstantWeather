@@ -32,49 +32,6 @@ let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
-function creationCarteV1(TypeCarte, valeur){
-    const template = document.getElementById("templateCarte")
-    let clone = document.importNode(template.content, true)
-
-    let span = clone.querySelector('span')
-
-
-    let h2 = clone.querySelectorAll("h2")
-    let h3 = clone.querySelectorAll("h3")
-    
-
-    switch (TypeCarte) {
-        case "Ensoleillement":
-            span.classList.add("fa-regular", "fa-sun")
-            h2[0].textContent = TypeCarte
-            h3[0].textContent = valeur + " h" 
-            break;
-        
-            
-        case "T° Min":
-            span.classList.add("fa-solid", "fa-temperature-low")
-            h2[0].textContent = TypeCarte
-            h3[0].textContent = valeur + " °C"
-            break;
-        
-        case "T° Max":
-            span.classList.add("fa-solid", "fa-temperature-high")
-            h2[0].textContent = TypeCarte
-            h3[0].textContent = valeur + " °C"
-            break;
-    
-        case "Proba pluie":
-            span.classList.add("fa-solid", "fa-cloud-rain")
-            h2[0].textContent = TypeCarte
-            h3[0].textContent = valeur + " %"
-            break;
-    }
-
-    let divCarte = document.querySelector("#listeCarte")
-    divCarte.appendChild(clone)
-
-}
-
 console.log(str);
 zoneCodePostal.addEventListener("input", recherche);
 
@@ -182,15 +139,82 @@ function afficheMeteo(){
     });
 }
 
-function enleverEspace(str){
-    return str.replace(/\s/g, "")
-}
-
 function creationCarte(data){
-    if(nbjour = 1){
+    if(nbjour == 1){
         creationCarteV1(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
         creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
         creationCarteV1(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarteV1(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+    }else {
+        creationCarteV2(data);
     }
 }
+
+function creationCarteV1(TypeCarte, valeur){
+    const template = document.getElementById("templateCarte")
+    let clone = document.importNode(template.content, true)
+
+    let span = clone.querySelector('span')
+
+
+    let h2 = clone.querySelectorAll("h2")
+    let h3 = clone.querySelectorAll("h3")
+    
+
+    switch (TypeCarte) {
+        case "Ensoleillement":
+            span.classList.add("fa-regular", "fa-sun")
+            h2[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " h" 
+            break;
+        
+            
+        case "T° Min":
+            span.classList.add("fa-solid", "fa-temperature-low")
+            h2[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " °C"
+            break;
+        
+        case "T° Max":
+            span.classList.add("fa-solid", "fa-temperature-high")
+            h2[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " °C"
+            break;
+    
+        case "Proba pluie":
+            span.classList.add("fa-solid", "fa-cloud-rain")
+            h2[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " %"
+            break;
+    }
+
+    let divCarte = document.querySelector("#listeCarte")
+    divCarte.appendChild(clone)
+
+}
+
+const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+var date = new Date()
+
+function creationCarteV2(data){
+    
+
+    for (let i = 1; i < nbjour; i++){
+        const template = document.getElementById("templateCarteV2")
+        let clone = document.importNode(template.content, true)
+    
+        let h4 = clone.querySelectorAll("h4")
+        if(i == 1){
+            h4[0].textContent = "Aujourd'hui"
+        }else {
+            h4[0].textContent = jours[date.getDay() + i]
+        }
+
+
+
+        let h5 = clone.querySelectorAll("h5")
+
+
+    }
+}
+
