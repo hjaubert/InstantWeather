@@ -111,6 +111,27 @@ h3{
 select {
     font-size: 1.6em;
 }
+
+#boutonParametres {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 3vw;
+    margin: 20px;
+}
+
+#pageParametres {
+    visibility: hidden;
+    position: absolute;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
 /*****************************************************************************/
 
 /* The switch - the box around the slider */
