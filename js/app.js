@@ -20,7 +20,7 @@ var str = ""
 var verifCaractere
 let villeChoisie
 
-const token = "71f59f4e95789089e978421273a728812bbff1652370a69215bd899c8e1ec117"
+const token = "71f59f4e95789089e978421273a728812bbff1652370a69215bd899c8e1ec116"
 let codeInsee
 
 let body = document.body;
@@ -90,7 +90,6 @@ function chargeParametre(){
         window.localStorage.setItem("ValeurJour",1)
         nbjour = 1;
     }
-    console.log(window.localStorage.getItem("ValeurJour"))
     changeLatitude.checked = validee(window.localStorage.getItem("ValeurLatitude"))
     changeLongitude.checked = validee(window.localStorage.getItem("ValeurLongitude"))
     changeCumulPluie.checked = validee(window.localStorage.getItem("ValeurCumulPluie"))
@@ -185,6 +184,12 @@ function changementFond(weatherCode){
 
 zoneCodePostal.addEventListener("input", recherche);
 
+function changeURL(){
+    return false;
+}
+
+
+
 function recherche(valeur){
     verifCaractere = valeur.target.value
     if (verifChiffre(verifCaractere.charCodeAt(verifCaractere.length -1)) == false){
@@ -255,6 +260,7 @@ function afficheMeteo(code){
         creationCarte(data)
     })
     .catch(error => {
+        console.log(error)
         alert("Attention meteo bug")
     });
 }
