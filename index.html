@@ -52,9 +52,9 @@
 
 
         <div id="barreDeRecherche">
-            <form action="#">
+            <form onSubmit=changeURL() action="#">
                 <div id="inputRecherche">
-                    <input id = "zoneCodePostal" type="text" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
+                    <input id = "zoneCodePostal" autocomplete="off"  type="text" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
                 </div>
             </form>
         </div>
