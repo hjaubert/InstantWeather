@@ -15,6 +15,7 @@ var moyVent = false;
 var directionVent = false;
 var nbjour = 1;
 
+var infoMeteo = null
 
 
 const selectionVilles = document.getElementById("selection")
@@ -34,6 +35,7 @@ let tempMax = document.getElementById("tempMax")
 let tempMin = document.getElementById("tempMin")
 let probaPluie = document.getElementById("probaPluie")
 let nbHensoleillement = document.getElementById("nbHensoleillement")
+
 let afficheCartes = document.getElementById("listeCarte")
 let afficheCartesV2 = document.getElementById("listeCarteV2")
 let titreVille = document.getElementById("titreVille")
@@ -68,7 +70,6 @@ function getValeurInputRange(){
 }
 
 function changeOption(){
-  
     pageParametres.classList.remove("apparitionPageParam")
     pageParametres.classList.add("disparitionPageParam")
 
@@ -79,13 +80,19 @@ function changeOption(){
     window.localStorage.setItem("ValeurDirectionVent",changeDirectionVent.checked )
     window.localStorage.setItem("ValeurJour",choixJour.value )
     chargeVariableLocal()
+
+    if(infoMeteo != null){
+        creationCarte(infoMeteo)
+        ajoutLatidudeLongitude(infoMeteo)
+    }
+    
 }
 
 function chargeParametre(){
 
     pageParametres.classList.remove("disparitionPageParam")
     pageParametres.classList.add("apparitionPageParam")
-  
+
     if (window.localStorage.getItem("ValeurLatitude") == null){
         window.localStorage.setItem("ValeurLatitude",false )
         latitude = false
@@ -260,8 +267,6 @@ function afficheVille(){
             bouton.addEventListener('click', () => {
                 zoneCodePostal.value = "";
                 selectionVilles.innerHTML = "";
-                afficheCartes.innerHTML = "";
-                afficheCartesV2.innerHTML = "";
                 titreVille.innerText = "";
                 titreVille.innerText = bouton.textContent
                 afficheMeteo(bouton.value)
@@ -279,7 +284,8 @@ function afficheMeteo(code){
         return reponse.json();
     })
     .then(data => {
-        ajoutLatidude(data)
+        infoMeteo = data
+        ajoutLatidudeLongitude(data)
         creationCarte(data)
     })
     .catch(error => {
@@ -287,7 +293,7 @@ function afficheMeteo(code){
     });
 }
 
-function ajoutLatidude(data){
+function ajoutLatidudeLongitude(data){
     var h5Latitude = document.getElementById("latitude")
     var h5Longitude = document.getElementById("longitude")
     h5Latitude.innerText = ""
@@ -302,6 +308,8 @@ function ajoutLatidude(data){
 
 
 function creationCarte(data){
+    afficheCartes.innerHTML = "";
+    afficheCartesV2.innerHTML = "";
     if(nbjour == 1){
         creationCarteV1(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
         creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
