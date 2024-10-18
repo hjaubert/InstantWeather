@@ -18,8 +18,8 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.2em;
     text-decoration: underline;
+    font-size: 2.2em;
 }
 
 #barreDeRecherche {
@@ -73,7 +73,49 @@ input {
     }
 }
 
-.fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
+/************************modife pour carte v2**********************************/
+
+
+#listeCarteV2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.carteV2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 0.6vw black;
+    border-radius: 3vw;
+    margin: 1vh;
+    padding: 1% 1% 2%;
+}
+
+h4{
+    font-size: 2.5vw;
+    margin: 0;
+    padding: 0;
+}
+
+#element{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+p{
+    font-size: 2.5vw;
+    font-weight: bold;
+    white-space: nowrap;
+    margin: 1.5vw 2vw 1.5vw 1vw;
+}
+
+/************************ fin modife pour carte v2**********************************/
+
+.fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain,.fa-vial,.fa-wind,.fa-compass{
     font-size: 3vw;
 }
 
@@ -84,6 +126,7 @@ h2{
 h3{
     font-size: 2vw;
 }
+
 
 #selection {
     margin-bottom: 0;

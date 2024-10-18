@@ -4,13 +4,23 @@ const TypeCarte = {
     Ensoleillement: "Ensoleillement",
     ProbaPluie: "Proba pluie"
 }
+
+var latitude = false;
+var longitude = false;
+var cumulPlui = true;
+var moyVent = true;
+var directionVent = true;
+var nbjour = 7;
+
+
+
 const selectionVilles = document.getElementById("selection")
 var zoneCodePostal = document.getElementById("zoneCodePostal");
 var str = ""
 var verifCaractere
 let villeChoisie
 
-const token = "7098b091691f53b4ba9f102d5c8a5018c423a36c5eb9e5d061bcfc050d3b0e8b"
+const token = "71f59f4e95789089e978421273a728812bbff1652370a69215bd899c8e1ec117"
 let codeInsee
 
 let body = document.body;
@@ -22,6 +32,7 @@ let tempMin = document.getElementById("tempMin")
 let probaPluie = document.getElementById("probaPluie")
 let nbHensoleillement = document.getElementById("nbHensoleillement")
 let afficheCartes = document.getElementById("listeCarte")
+let afficheCartesV2 = document.getElementById("listeCarteV2")
 let titreVille = document.getElementById("titreVille")
 
 let choixJour = document.getElementById("choixJour")
@@ -172,7 +183,94 @@ function changementFond(weatherCode){
 
 }
 
-function creationCarte(TypeCarte, valeur){
+zoneCodePostal.addEventListener("input", recherche);
+
+function recherche(valeur){
+    verifCaractere = valeur.target.value
+    if (verifChiffre(verifCaractere.charCodeAt(verifCaractere.length -1)) == false){
+        var suprime =  zoneCodePostal.value.replace(/[^0-9\.]/g,'');
+        zoneCodePostal.value =  suprime.replace(/\./g,'');
+    }
+    else {
+        str = verifCaractere
+        if (str.length == 5){
+            afficheVille()
+        }
+    }
+}
+
+function verifChiffre(chiffre){
+    if (chiffre >= 48 && chiffre <= 57){
+        return true
+    }
+    return false
+}
+
+function afficheVille(){
+    fetch('https://geo.api.gouv.fr/communes?codePostal='+ parseInt(str))
+    .then(reponse => {
+    if(!reponse.ok){
+        throw new Error("Network response was not ok");
+    }
+        return reponse.json();
+    })
+    .then(data => {
+        selectionVilles.innerHTML = ""
+        if(data.length <= 0){   
+            alert("Attention le code postale n'existe pas")
+        }
+        data.forEach((commune) => {
+            if(commune.nom.includes("'")){
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= " + commune.code + " >" + commune.nom + "</button>";
+            } else {
+                selectionVilles.innerHTML += "<button class='villeChoisie' value= '" + commune.code + "' >" + commune.nom + "</button>";
+            }
+        })
+
+        villeChoisie = document.querySelectorAll(".villeChoisie");
+
+        villeChoisie.forEach((bouton) => {
+            bouton.addEventListener('click', () => {
+                zoneCodePostal.value = "";
+                selectionVilles.innerHTML = "";
+                afficheCartes.innerHTML = "";
+                afficheCartesV2.innerHTML = "";
+                titreVille.innerText = "";
+                titreVille.innerText = bouton.textContent
+                afficheMeteo(bouton.value)
+            });
+        });
+    });
+}
+
+function afficheMeteo(code){
+    fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + code)
+    .then(reponse => {
+    if(!reponse.ok){
+        throw new Error("Network response was not ok");
+    }
+        return reponse.json();
+    })
+    .then(data => {
+        creationCarte(data)
+    })
+    .catch(error => {
+        alert("Attention meteo bug")
+    });
+}
+
+function creationCarte(data){
+    if(nbjour == 1){
+        creationCarteV1(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
+        creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
+        creationCarteV1(TypeCarte.TMin,data.forecast[0].tmin)
+        creationCarteV1(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+    } else {
+        creationCarteV2(data);
+    }
+}
+
+function creationCarteV1(TypeCarte, valeur){
     const template = document.getElementById("templateCarte")
     let clone = document.importNode(template.content, true)
 
@@ -215,109 +313,48 @@ function creationCarte(TypeCarte, valeur){
 
 }
 
-zoneCodePostal.addEventListener("input", recherche);
+const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+var date = new Date()
 
-function recherche(valeur){
-    verifCaractere = valeur.target.value
-    if (verifChiffre(verifCaractere.charCodeAt(verifCaractere.length -1)) == false){
-        var suprime =  zoneCodePostal.value.replace(/[^0-9\.]/g,'');
-        zoneCodePostal.value =  suprime.replace(/\./g,'');
-    }
-    else {
-        str = verifCaractere
-        if (str.length == 5){
-            afficheVille()
-        }
-    }
-}
+function creationCarteV2(data){
 
-function verifChiffre(chiffre){
-    if (chiffre >= 48 && chiffre <= 57){
-        return true
-    }
-    return false
-}
-
-function afficheVille(){
-    fetch('https://geo.api.gouv.fr/communes?codePostal='+ parseInt(str))
-    .then(reponse => {
-    if(!reponse.ok){
-        throw new Error("Network response was not ok");
-    }
-        return reponse.json();
-    })
-    .then(data => {
-        selectionVilles.innerHTML = ""
-        if(data.length <= 0){   
-            alert("Attention le code postale n'existe pas")
+    for (let i = 0; i < nbjour; i++){
+        let divCarte = document.querySelector("#listeCarteV2")
+        const template = document.getElementById("templateCarteV2")
+        let clone = document.importNode(template.content, true)
+    
+        let h4 = clone.querySelectorAll("h4")
+        if(i == 0){
+            h4[0].textContent = "Aujourd'hui"
+        }else {
+            h4[0].textContent = jours[(date.getDay() + i)%7]            
         }
 
-        data.forEach((commune) => {
-            if(commune.nom.includes("'")){
-                selectionVilles.innerHTML += "<button class='villeChoisie' value= " + commune.nom + " >" + commune.nom + "</button>";
-            } else {
-                selectionVilles.innerHTML += "<button class='villeChoisie' value= '" + commune.nom + "' >" + commune.nom + "</button>";
-            }
-        })
+        let p = clone.querySelectorAll("p")
+        p[0].textContent = data.forecast[i].sun_hours + " h"
+        p[1].textContent = data.forecast[i].tmax + " °C"
+        p[2].textContent = data.forecast[i].tmin + " °C"
+        p[3].textContent = data.forecast[i].probarain + " %"
 
-        villeChoisie = document.querySelectorAll(".villeChoisie");
+        let span = clone.querySelectorAll("span")
 
-        villeChoisie.forEach((bouton) => {
-            bouton.addEventListener('click', () => {
-                const valeur = bouton.value; // Décoder la valeur pour obtenir le vrai nom
-                selectionVilles.innerHTML = "";
-                afficheCartes.innerHTML = "";
-                titreVille.innerText = "";
-                getInsee(valeur); // Appeler la fonction avec le nom décodé
-            });
-        });
-    });
-}
+        if(cumulPlui == true){
+            span[4].classList.add("fa-solid", "fa-vial")
+            p[4].textContent = data.forecast[i].rr10 + " mm"
+        }
 
-function getInsee(nomVille){
-    fetch("https://api.meteo-concept.com/api/location/cities?token=" + token + "&search=" + nomVille)
-    .then(reponse => {
-    if(!reponse.ok){
-        throw new Error("Network response was not ok");
+        if(moyVent == true){
+            span[5].classList.add("fa-solid", "fa-wind")
+            p[5].textContent = data.forecast[i].wind10m + " km/h"
+        }
+
+        if(directionVent == true){
+            span[6].classList.add("fa-solid", "fa-compass")
+            p[6].textContent = data.forecast[i].dirwind10m + " °"
+        }
+        
+        divCarte.appendChild(clone)
     }
-        return reponse.json();
-    })
-    .then(data => {
-        codeInsee = data.cities[0].insee
-        titreVille.innerText = nomVille
-        afficheMeteo()
-    })
-    .catch(error => {
-        titreVille.innerText = ""
-        alert("Attention insee bug")
-    });
-}
-
-function afficheMeteo(){
-    fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + parseInt(codeInsee))
-    .then(reponse => {
-    if(!reponse.ok){
-        throw new Error("Network response was not ok");
-    }
-        return reponse.json();
-    })
-    .then(data => {
-        creationCarte(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
-        creationCarte(TypeCarte.TMax,data.forecast[0].tmax)
-        creationCarte(TypeCarte.TMin,data.forecast[0].tmin)
-        creationCarte(TypeCarte.ProbaPluie,data.forecast[0].probarain)
-        changementFond(data.forecast[0].weather)
-        // resultatmeteoLatitude.innerText = resultatmeteoLatitude.textContent + ' ' + data.forecast[0].latitude;
-        // resultatmeteoLontitude.innerText = resultatmeteoLontitude.textContent + ' ' + data.forecast[0].longitude;
-        // tempMax.innerText = tempMax.textContent + ' ' + data.forecast[0].tmax;
-        // tempMin.innerText = tempMin.textContent + ' ' + data.forecast[0].tmin;
-        // probaPluie.innerText = probaPluie.textContent + ' ' + data.forecast[0].probarain +"%";
-        // nbHensoleillement.innerText = nbHensoleillement.textContent + ' ' + data.forecast[0].sun_hours + "h";
-
-    })
-    .catch(error => {
-        alert("Attention meteo bug")
-    });
 }
 
 var snow = {
