@@ -14,8 +14,8 @@
         width: 25vh;
     }
 
-    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
-        font-size: 5vh;
+    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain,.fa-vial,.fa-wind,.fa-compass{
+        font-size: 5vw;
     }
 
     h2 {
@@ -46,8 +46,8 @@
         width: 23vh;
     }
 
-    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain{
-        font-size: 7vh;
+    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain,.fa-vial,.fa-wind,.fa-compass{
+        font-size: 4vw;
     }
 
     h2 {

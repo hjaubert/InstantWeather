@@ -7,10 +7,10 @@ const TypeCarte = {
 
 var latitude = false;
 var longitude = false;
-var cumulPlui = true;
-var moyVent = true;
-var directionVent = true;
-var nbjour = 7;
+var cumulPlui = false;
+var moyVent = false;
+var directionVent = false;
+var nbjour = 1;
 
 
 
