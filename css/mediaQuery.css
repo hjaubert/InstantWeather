@@ -19,11 +19,19 @@
     }
 
     h2 {
-        font-size: 3vw;
+        font-size: 4vw;
     }
 
     h3 {
-        font-size: 3vw;
+        font-size: 4vw;
+    }
+
+    #pageParametres {
+        width: 75%;
+    }
+
+    #boutonAnnuler, #boutonValider {
+        font-size: 2.5em;
     }
 
 }
@@ -51,11 +59,11 @@
     }
 
     h2 {
-        font-size: 5vw;
+        font-size: 6.5vw;
     }
 
     h3 {
-        font-size: 5vw;
+        font-size: 6.5vw;
     }
 
     #zoneCodePostal {
@@ -68,6 +76,19 @@
 
     #titreVille {
         font-size: 1.7em;
+    }
+
+    #pageParametres {
+        width: 100%;
+    }
+
+    #boutonParametres {
+        font-size: 2.5em;
+        margin: 10px;
+    }
+
+    #boutonAnnuler, #boutonValider {
+        font-size: 2.3em;
     }
 
 }

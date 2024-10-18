@@ -35,27 +35,40 @@ let afficheCartes = document.getElementById("listeCarte")
 let afficheCartesV2 = document.getElementById("listeCarteV2")
 let titreVille = document.getElementById("titreVille")
 
-let choixJour = document.getElementById("choixJour")
-let afficheJour = document.getElementById("afficheJour")
+let pageParametres = document.getElementById("pageParametres")
+const choixJour = document.getElementById("choixJour")
+const afficheJour = document.getElementById("afficheJour")
+const inputRange = document.querySelector('.inputRange')
+inputRange.addEventListener("input", getValeurInputRange)
+inputRange.dispatchEvent(new Event('input'))
 let changeLatitude = document.getElementById("changeLatitude")
 let changeLongitude = document.getElementById("changeLongitude")
 let changeCumulPluie = document.getElementById("changeCumulPluie")
 let changeVentMoyen = document.getElementById("changeVentMoyen")
 let changeDirectionVent = document.getElementById("changeDirectionVent")
-let bouttonValide = document.getElementById("bouttonValide")
-bouttonValide.addEventListener("click", changeOption);
-let bouttonAnnule = document.getElementById("bouttonAnnule")
-bouttonAnnule.addEventListener("click", afficheParamere);
-let bouttonParametre = document.getElementById("bouttonParametre")
-bouttonParametre.addEventListener("click", chargeParametre);
-let copieChoixJour = afficheJour.textContent
+let boutonValider = document.getElementById("boutonValider")
+boutonValider.addEventListener("click", changeOption);
+let boutonAnnuler = document.getElementById("boutonAnnuler")
+boutonAnnuler.addEventListener("click", annulerParametres);
+let boutonParametres = document.getElementById("boutonParametres")
+boutonParametres.addEventListener("click", chargeParametre);
 
-function actualisetextJour(){
-    afficheJour.innerText = copieChoixJour
-    afficheJour.innerText = afficheJour.textContent + choixJour.value
+function getValeurInputRange(){
+    const valeur = choixJour.value;
+    afficheJour.textContent = valeur;
+
+    const pourcentage = (valeur - choixJour.min) / (choixJour.max - choixJour.min);
+    const rangeLargeur = choixJour.offsetWidth;
+    const valeurLargeur = afficheJour.offsetWidth;
+
+    afficheJour.style.left = `calc(${pourcentage * 100}% - ${valeurLargeur / 2}px)`;
 }
 
 function changeOption(){
+  
+    pageParametres.classList.remove("apparitionPageParam")
+    pageParametres.classList.add("disparitionPageParam")
+
     window.localStorage.setItem("ValeurLatitude",changeLatitude.checked ) 
     window.localStorage.setItem("ValeurLongitude",changeLongitude.checked )
     window.localStorage.setItem("ValeurCumulPluie",changeCumulPluie.checked )
@@ -66,6 +79,10 @@ function changeOption(){
 }
 
 function chargeParametre(){
+
+    pageParametres.classList.remove("disparitionPageParam")
+    pageParametres.classList.add("apparitionPageParam")
+  
     if (window.localStorage.getItem("ValeurLatitude") == null){
         window.localStorage.setItem("ValeurLatitude",false )
         latitude = false
@@ -90,6 +107,7 @@ function chargeParametre(){
         window.localStorage.setItem("ValeurJour",1)
         nbjour = 1;
     }
+    console.log(window.localStorage.getItem("ValeurJour"))
     changeLatitude.checked = validee(window.localStorage.getItem("ValeurLatitude"))
     changeLongitude.checked = validee(window.localStorage.getItem("ValeurLongitude"))
     changeCumulPluie.checked = validee(window.localStorage.getItem("ValeurCumulPluie"))
@@ -108,8 +126,9 @@ function chargeVariableLocal(){
     nbjour =  window.localStorage.getItem("ValeurJour")
 }
 
-function afficheParamere(){
-    alert("a faire")
+function annulerParametres(){
+    pageParametres.classList.remove("apparitionPageParam")
+    pageParametres.classList.add("disparitionPageParam")
 }
 
 function validee(valeur){
