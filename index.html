@@ -55,13 +55,11 @@
                 <p>Nombre de jours :</p>
                 <div class="inputRange">
                     <input type="range" id="choixJour" min="1" max="7" value="1">
-                    <span class="valeur" id="afficheJour">1</span>
+                    <span class="valeur" id="afficheJour"></span>
                 </div>
             </div>
 
-            <div id="ValiderAnnuler">
-                <span id="boutonValider" class="fa-solid fa-check"></span>
-            </div>
+            <span id="boutonValider" class="fa-solid fa-check"></span>
         </div>
     </div>
     <header>
@@ -72,19 +70,17 @@
     </header>
     <main>
         <div id="barreDeRecherche">
-            <form onSubmit=changeURL() action="#">
-                <div id="inputRecherche">
-                    <input id = "zoneCodePostal" autocomplete="off"  type="text" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
-                </div>
-            </form>
+            <div id="inputRecherche">
+                <input id = "zoneCodePostal" autocomplete="off"  type="text" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
+            </div>
         </div>
         <div id="selection">
         </div>
-  
+
         <h2 id="titreVille"></h2>
         <h5 id="latitude"></h5>
         <h5 id="longitude"></h5>
-  
+
         <div id="listeCarte">
             
         </div>
@@ -101,7 +97,7 @@
         </template>
 
         <template id="templateCarteV2">
-            <div class="carteV2">
+            <div class="carteV2 anim">
                 <h4></h4>
                 <div id="element">
                     <span class="fa-regular fa-sun"></span>

@@ -29,13 +29,6 @@ let codeInsee
 
 let body = document.body;
 let fond = document.getElementById("fond")
-let resultatmeteoLatitude = document.getElementById("resultatmeteoLatitude")
-let resultatmeteoLontitude = document.getElementById("resultatmeteoLontitude")
-let tempMax = document.getElementById("tempMax")
-let tempMin = document.getElementById("tempMin")
-let probaPluie = document.getElementById("probaPluie")
-let nbHensoleillement = document.getElementById("nbHensoleillement")
-
 let afficheCartes = document.getElementById("listeCarte")
 let afficheCartesV2 = document.getElementById("listeCarteV2")
 let titreVille = document.getElementById("titreVille")
@@ -66,10 +59,24 @@ function getValeurInputRange(){
     const rangeLargeur = choixJour.offsetWidth;
     const valeurLargeur = afficheJour.offsetWidth;
 
-    afficheJour.style.left = `calc(${pourcentage * 100}% - ${valeurLargeur / 2}px)`;
+    window.localStorage.setItem("positionValeurInput", `calc(${pourcentage * 100}% - ${valeurLargeur / 2}px)`)
+    afficheJour.style.left = window.localStorage.getItem("positionValeurInput")
+}
+
+function AffichageDeBaseValeurInputRange(){
+    const valeur = window.localStorage.getItem("ValeurJour")
+    afficheJour.textContent = valeur
+
+    const pourcentage = (valeur - choixJour.min) / (choixJour.max - choixJour.min);
+    const rangeLargeur = choixJour.offsetWidth;
+    const valeurLargeur = afficheJour.offsetWidth;
+
+    window.localStorage.setItem("positionValeurInput", `calc(${pourcentage * 100}% - ${valeurLargeur / 2}px)`)
+    afficheJour.style.left = window.localStorage.getItem("positionValeurInput")
 }
 
 function changeOption(){
+  
     pageParametres.classList.remove("apparitionPageParam")
     pageParametres.classList.add("disparitionPageParam")
 
@@ -89,6 +96,8 @@ function changeOption(){
 }
 
 function chargeParametre(){
+
+    AffichageDeBaseValeurInputRange()
 
     pageParametres.classList.remove("disparitionPageParam")
     pageParametres.classList.add("apparitionPageParam")
@@ -117,6 +126,7 @@ function chargeParametre(){
         window.localStorage.setItem("ValeurJour",1)
         nbjour = 1;
     }
+
     console.log(window.localStorage.getItem("ValeurJour"))
     changeLatitude.checked = validee(window.localStorage.getItem("ValeurLatitude"))
     changeLongitude.checked = validee(window.localStorage.getItem("ValeurLongitude"))
@@ -149,7 +159,7 @@ function validee(valeur){
 }
 
 function changementFond(weatherCode){
-
+    
     const valeurSoleil = [0,1,2]
     const valeurNuageux = [3,4,5]
     const valeurPluie = [10,11,12,13,14,15,16,30,31,32,40,41,42,43,44,45,46,47,48,70,71,72,73,74,75,76,77,78,
@@ -194,7 +204,6 @@ function changementFond(weatherCode){
         body.classList.remove("fondNuage")
         body.classList.remove("fondOrage")
         body.classList.remove("couleurPluie")
-        snow.init(0)
         body.classList.add("fondNeige")
         snow.init(10);
     }
@@ -216,8 +225,6 @@ zoneCodePostal.addEventListener("input", recherche);
 function changeURL(){
     return false;
 }
-
-
 
 function recherche(valeur){
     verifCaractere = valeur.target.value
@@ -287,6 +294,7 @@ function afficheMeteo(code){
         infoMeteo = data
         ajoutLatidudeLongitude(data)
         creationCarte(data)
+        changementFond(data.forecast[0].weather)
     })
     .catch(error => {
         alert("Attention meteo bug")

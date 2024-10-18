@@ -43,6 +43,8 @@ input {
     align-items: center;
     justify-content: center;
     margin: 3.125em;
+    flex-wrap: wrap;
+    gap: 100px;
 }
 
 .carte{
@@ -50,7 +52,7 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 1.25em;
+    /* margin: 1.25em; */
     border: solid 5px black;
     border-radius: 10%;
     width: 15vw;
@@ -156,6 +158,27 @@ select {
 }
 
 /*********************Début style Page Paramètres*******************/
+#pageParametres {
+    /* visibility: hidden; */
+    color: whitesmoke;
+    position: fixed;
+    background-color: rgb(35, 34, 34);
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    right: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+#parametres {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
 #boutonParametres {
     display: flex;
     justify-content: flex-end;
@@ -180,28 +203,15 @@ select {
     color: green;
     cursor: pointer;
     display: flex;
-    align-items: center;
-}
-
-#pageParametres {
-    /* visibility: hidden; */
-    /* color: white; */
-    position: absolute;
-    background-color: slategray;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: 100%;
-    right: -100%;
-    top: 0;
-    z-index: 1;
+    align-self: center;
+    width: fit-content;
 }
 
 .choixParametres {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .choixParametres p {
@@ -215,13 +225,7 @@ select {
     text-decoration: underline;
     font-size: 3em;
     margin: 0;
-}
-
-#parametres {
-    display: flex;
-    flex-direction: column;
-    margin-left: 5%;
-    margin-top: 5%;
+    margin-bottom: 10px;
 }
 
 #ValiderAnnuler {
