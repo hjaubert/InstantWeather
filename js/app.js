@@ -260,7 +260,6 @@ function afficheMeteo(code){
         creationCarte(data)
     })
     .catch(error => {
-        console.log(error)
         alert("Attention meteo bug")
     });
 }
