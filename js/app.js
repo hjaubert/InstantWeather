@@ -46,8 +46,8 @@ let bouttonValide = document.getElementById("bouttonValide")
 bouttonValide.addEventListener("click", changeOption);
 let bouttonAnnule = document.getElementById("bouttonAnnule")
 bouttonAnnule.addEventListener("click", afficheParamere);
-let bouttonParamétre = document.getElementById("bouttonParamétre")
-bouttonParamétre.addEventListener("click", chargeParametre);
+let bouttonParametre = document.getElementById("bouttonParametre")
+bouttonParametre.addEventListener("click", chargeParametre);
 let copieChoixJour = afficheJour.textContent
 
 function actualisetextJour(){
