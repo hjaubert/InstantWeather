@@ -2,7 +2,10 @@ const TypeCarte = {
     TMin: "T° Min",
     TMax: "T° Max",
     Ensoleillement: "Ensoleillement",
-    ProbaPluie: "Proba pluie"
+    ProbaPluie: "Proba pluie",
+    CumulPlui:"Cumul Pluie",
+    VentMoyen: "Vent Moyen",
+    DirectionVent: "Direction Vent"
 }
 
 var latitude = false;
@@ -304,6 +307,17 @@ function creationCarte(data){
         creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
         creationCarteV1(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarteV1(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+        if(cumulPlui == true){
+            creationCarteV1(TypeCarte.CumulPlui,data.forecast[0].rr10)
+        }
+
+        if(moyVent == true){
+            creationCarteV1(TypeCarte.VentMoyen,data.forecast[0].wind10m)
+        }
+
+        if(directionVent == true){
+            creationCarteV1(TypeCarte.DirectionVent,data.forecast[0].dirwind10m)
+        }
     } else {
         creationCarteV2(data);
     }
@@ -345,6 +359,22 @@ function creationCarteV1(TypeCarte, valeur){
             h2[0].textContent = TypeCarte
             h3[0].textContent = valeur + " %"
             break;
+        case "Cumul Pluie":
+            span.classList.add("fa-solid", "fa-vial")
+            h2[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " mm"
+            break;
+        case "Vent Moyen":
+            span.classList.add("fa-solid", "fa-wind")
+            h2[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " km/h"
+            break;
+        case "Direction Vent":
+            span.classList.add("fa-solid", "fa-compass")
+            h2[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " °"
+            break;
+
     }
 
     let divCarte = document.querySelector("#listeCarte")
