@@ -25,8 +25,11 @@ let afficheCartes = document.getElementById("listeCarte")
 let titreVille = document.getElementById("titreVille")
 
 let pageParametres = document.getElementById("pageParametres")
-let choixJour = document.getElementById("choixJour")
-let afficheJour = document.getElementById("afficheJour")
+const choixJour = document.getElementById("choixJour")
+const afficheJour = document.getElementById("afficheJour")
+const inputRange = document.querySelector('.inputRange')
+inputRange.addEventListener("input", getValeurInputRange)
+inputRange.dispatchEvent(new Event('input'))
 let changeLatitude = document.getElementById("changeLatitude")
 let changeLongitude = document.getElementById("changeLongitude")
 let changeCumulPluie = document.getElementById("changeCumulPluie")
@@ -38,11 +41,16 @@ let boutonAnnuler = document.getElementById("boutonAnnuler")
 boutonAnnuler.addEventListener("click", annulerParametres);
 let boutonParametres = document.getElementById("boutonParametres")
 boutonParametres.addEventListener("click", chargeParametre);
-let copieChoixJour = afficheJour.textContent
 
-function actualisetextJour(){
-    afficheJour.innerText = copieChoixJour
-    afficheJour.innerText = afficheJour.textContent + choixJour.value
+function getValeurInputRange(){
+    const valeur = choixJour.value;
+    afficheJour.textContent = valeur;
+
+    const pourcentage = (valeur - choixJour.min) / (choixJour.max - choixJour.min);
+    const rangeLargeur = choixJour.offsetWidth;
+    const valeurLargeur = afficheJour.offsetWidth;
+
+    afficheJour.style.left = `calc(${pourcentage * 100}% - ${valeurLargeur / 2}px)`;
 }
 
 function changeOption(){

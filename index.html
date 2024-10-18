@@ -12,12 +12,13 @@
 </head>
 <body>
     <div id="pageParametres">
+        <span id="boutonAnnuler" class="fa-solid fa-x"></span>
         <h1>Paramètres</h1>
         <div id="parametres">
             <div class="choixParametres">
                 <p>Latitude :</p>
                 <label class="switch">
-                    <input type="checkbox" id="changeLatitude"><input/>
+                    <input type="checkbox" id="changeLatitude">
                     <span class="slider round" id="ChoixLatitude"></span>             
                 </label>
             </div>
@@ -50,12 +51,12 @@
                 </label>
             </div>
 
-            <input type="range" id="choixJour" min="1" max="7" value="1">
-            <label id="afficheJour">nb jour affichée : </label>
+            <div class="inputRange">
+                <input type="range" id="choixJour" min="1" max="7" value="1">
+                <span class="valeur" id="afficheJour">1</span>
+            </div>
 
             <div id="ValiderAnnuler">
-                <span id="boutonAnnuler" class="fa-solid fa-x"></span>
-
                 <span id="boutonValider" class="fa-solid fa-check"></span>
             </div>
         </div>
