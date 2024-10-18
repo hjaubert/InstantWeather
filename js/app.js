@@ -2,7 +2,10 @@ const TypeCarte = {
     TMin: "T° Min",
     TMax: "T° Max",
     Ensoleillement: "Ensoleillement",
-    ProbaPluie: "Proba pluie"
+    ProbaPluie: "Proba pluie",
+    CumulPlui:"Cumul Pluie",
+    VentMoyen: "Vent Moyen",
+    DirectionVent: "Direction Vent"
 }
 
 var latitude = false;
@@ -12,6 +15,7 @@ var moyVent = false;
 var directionVent = false;
 var nbjour = 1;
 
+var infoMeteo = null
 
 
 const selectionVilles = document.getElementById("selection")
@@ -72,7 +76,7 @@ function AffichageDeBaseValeurInputRange(){
 }
 
 function changeOption(){
-
+  
     pageParametres.classList.remove("apparitionPageParam")
     pageParametres.classList.add("disparitionPageParam")
 
@@ -83,6 +87,12 @@ function changeOption(){
     window.localStorage.setItem("ValeurDirectionVent",changeDirectionVent.checked )
     window.localStorage.setItem("ValeurJour",choixJour.value )
     chargeVariableLocal()
+
+    if(infoMeteo != null){
+        creationCarte(infoMeteo)
+        ajoutLatidudeLongitude(infoMeteo)
+    }
+    
 }
 
 function chargeParametre(){
@@ -264,8 +274,6 @@ function afficheVille(){
             bouton.addEventListener('click', () => {
                 zoneCodePostal.value = "";
                 selectionVilles.innerHTML = "";
-                afficheCartes.innerHTML = "";
-                afficheCartesV2.innerHTML = "";
                 titreVille.innerText = "";
                 titreVille.innerText = bouton.textContent
                 afficheMeteo(bouton.value)
@@ -283,7 +291,8 @@ function afficheMeteo(code){
         return reponse.json();
     })
     .then(data => {
-        ajoutLatidude(data)
+        infoMeteo = data
+        ajoutLatidudeLongitude(data)
         creationCarte(data)
         changementFond(data.forecast[0].weather)
     })
@@ -292,7 +301,7 @@ function afficheMeteo(code){
     });
 }
 
-function ajoutLatidude(data){
+function ajoutLatidudeLongitude(data){
     var h5Latitude = document.getElementById("latitude")
     var h5Longitude = document.getElementById("longitude")
     h5Latitude.innerText = ""
@@ -307,11 +316,24 @@ function ajoutLatidude(data){
 
 
 function creationCarte(data){
+    afficheCartes.innerHTML = "";
+    afficheCartesV2.innerHTML = "";
     if(nbjour == 1){
         creationCarteV1(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
         creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
         creationCarteV1(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarteV1(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+        if(cumulPlui == true){
+            creationCarteV1(TypeCarte.CumulPlui,data.forecast[0].rr10)
+        }
+
+        if(moyVent == true){
+            creationCarteV1(TypeCarte.VentMoyen,data.forecast[0].wind10m)
+        }
+
+        if(directionVent == true){
+            creationCarteV1(TypeCarte.DirectionVent,data.forecast[0].dirwind10m)
+        }
     } else {
         creationCarteV2(data);
     }
@@ -324,39 +346,54 @@ function creationCarteV1(TypeCarte, valeur){
     let span = clone.querySelector('span')
 
 
-    let h2 = clone.querySelectorAll("h2")
+    let p = clone.querySelectorAll("p")
     let h3 = clone.querySelectorAll("h3")
     
-
     switch (TypeCarte) {
         case "Ensoleillement":
             span.classList.add("fa-regular", "fa-sun")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " h" 
             break;
         
             
         case "T° Min":
             span.classList.add("fa-solid", "fa-temperature-low")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °C"
             break;
         
         case "T° Max":
             span.classList.add("fa-solid", "fa-temperature-high")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °C"
             break;
     
         case "Proba pluie":
             span.classList.add("fa-solid", "fa-cloud-rain")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " %"
             break;
+        case "Cumul Pluie":
+            span.classList.add("fa-solid", "fa-vial")
+            p[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " mm"
+            break;
+        case "Vent Moyen":
+            span.classList.add("fa-solid", "fa-wind")
+            p[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " km/h"
+            break;
+        case "Direction Vent":
+            span.classList.add("fa-solid", "fa-compass")
+            p[0].textContent = TypeCarte
+            h3[0].textContent = valeur + " °"
+            break;
     }
-
+    
     let divCarte = document.querySelector("#listeCarte")
     divCarte.appendChild(clone)
+    
 
 }
 
