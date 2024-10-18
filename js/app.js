@@ -59,6 +59,18 @@ function getValeurInputRange(){
     afficheJour.style.left = window.localStorage.getItem("positionValeurInput")
 }
 
+function AffichageDeBaseValeurInputRange(){
+    const valeur = window.localStorage.getItem("ValeurJour")
+    afficheJour.textContent = valeur
+
+    const pourcentage = (valeur - choixJour.min) / (choixJour.max - choixJour.min);
+    const rangeLargeur = choixJour.offsetWidth;
+    const valeurLargeur = afficheJour.offsetWidth;
+
+    window.localStorage.setItem("positionValeurInput", `calc(${pourcentage * 100}% - ${valeurLargeur / 2}px)`)
+    afficheJour.style.left = window.localStorage.getItem("positionValeurInput")
+}
+
 function changeOption(){
 
     pageParametres.classList.remove("apparitionPageParam")
@@ -74,6 +86,8 @@ function changeOption(){
 }
 
 function chargeParametre(){
+
+    AffichageDeBaseValeurInputRange()
 
     pageParametres.classList.remove("disparitionPageParam")
     pageParametres.classList.add("apparitionPageParam")
