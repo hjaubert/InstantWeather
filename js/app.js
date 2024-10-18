@@ -330,55 +330,54 @@ function creationCarteV1(TypeCarte, valeur){
     let span = clone.querySelector('span')
 
 
-    let h2 = clone.querySelectorAll("h2")
+    let p = clone.querySelectorAll("p")
     let h3 = clone.querySelectorAll("h3")
     
-
     switch (TypeCarte) {
         case "Ensoleillement":
             span.classList.add("fa-regular", "fa-sun")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " h" 
             break;
         
             
         case "T° Min":
             span.classList.add("fa-solid", "fa-temperature-low")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °C"
             break;
         
         case "T° Max":
             span.classList.add("fa-solid", "fa-temperature-high")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °C"
             break;
     
         case "Proba pluie":
             span.classList.add("fa-solid", "fa-cloud-rain")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " %"
             break;
         case "Cumul Pluie":
             span.classList.add("fa-solid", "fa-vial")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " mm"
             break;
         case "Vent Moyen":
             span.classList.add("fa-solid", "fa-wind")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " km/h"
             break;
         case "Direction Vent":
             span.classList.add("fa-solid", "fa-compass")
-            h2[0].textContent = TypeCarte
+            p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °"
             break;
-
     }
-
+    
     let divCarte = document.querySelector("#listeCarte")
     divCarte.appendChild(clone)
+    
 
 }
 
