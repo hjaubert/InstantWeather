@@ -252,12 +252,27 @@ function afficheMeteo(code){
         return reponse.json();
     })
     .then(data => {
+        ajoutLatidude(data)
         creationCarte(data)
     })
     .catch(error => {
         alert("Attention meteo bug")
     });
 }
+
+function ajoutLatidude(data){
+    var h5Latitude = document.getElementById("latitude")
+    var h5Longitude = document.getElementById("longitude")
+    h5Latitude.innerText = ""
+    h5Longitude.innerText = ""
+    if(latitude == true){
+        h5Latitude.innerText = "Latitude : " + data.city.latitude
+    }
+    if(longitude == true){
+        h5Longitude.innerText = "Longitude : " + data.city.longitude
+    }
+}
+
 
 function creationCarte(data){
     if(nbjour == 1){
