@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mediaQuery.css">
     <link rel="stylesheet" href="css/animFonds.css">
+    
+    <link rel="icon" type="image/vnd.icon" href="favicon.ico">
     <script defer src="js/app.js"></script>
     <script src="https://kit.fontawesome.com/90817b7c6b.js" crossorigin="anonymous"></script>
     <title>Instant Weather</title>
@@ -63,7 +66,9 @@
         </div>
     </div>
     <header>
-        <span id="boutonParametres" class="fa-solid fa-gear"></span>
+        <div class="containerBoutonParametres">
+            <span id="boutonParametres" class="fa-solid fa-gear"></span>
+        </div>
         <h1>
             Instant Weather
         </h1>
@@ -71,15 +76,19 @@
     <main>
         <div id="barreDeRecherche">
             <div id="inputRecherche">
-                <input id = "zoneCodePostal" autocomplete="off"  type="text" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
+                <label for="zoneCodePostal">
+                    <input id="zoneCodePostal" autocomplete="off"  type="text" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
+                </label>
             </div>
         </div>
         <div id="selection">
         </div>
 
         <h2 id="titreVille"></h2>
-        <h5 id="latitude"></h5>
-        <h5 id="longitude"></h5>
+        <div id="latitudeLongitude">
+            <h5 id="latitude"></h5>
+            <h5 id="longitude"></h5>
+        </div>
 
         <div id="listeCarte">
             
@@ -99,32 +108,43 @@
         <template id="templateCarteV2">
             <div class="carteV2 anim">
                 <h4></h4>
-                <div id="element">
-                    <span class="fa-regular fa-sun"></span>
-                    <p></p>
+                <div id="meteoV1">
+                    <div class="infosMeteo">
+                        <span class="iconesMeteo fa-regular fa-sun"></span>
+                        <p></p>
+                    </div>
                     
-                    <span class="fa-solid fa-temperature-high"></span>
-                    <p></p>
+                    <div class="infosMeteo">
+                        <span class="iconesMeteo fa-solid fa-temperature-high"></span>
+                        <p></p>
+                    </div>
                     
-                    <span class="fa-solid fa-temperature-low"></span>
-                    <p></p>
+                    <div class="infosMeteo">
+                        <span class="iconesMeteo fa-solid fa-temperature-low"></span>
+                        <p></p>
+                    </div>
                     
-                    <span class="fa-solid fa-cloud-rain"></span>
-                    <p></p>
-                    
-                    <span class=""></span>
-                    <p></p>
-                    
-                    <span class=""></span>
-                    <p></p>
-                    
-                    <span class=""></span>
-                    <p></p>
-                    
+                    <div class="infosMeteo">
+                        <span class="iconesMeteo fa-solid fa-cloud-rain"></span>
+                        <p></p>
+                    </div>
+                </div>
+                <div id="meteoV2">
+                    <div class="infosMeteo">
+                        <span></span>
+                        <p></p>
+                    </div>
+                    <div class="infosMeteo">
+                        <span></span>
+                        <p></p>
+                    </div>
+                    <div class="infosMeteo">
+                        <span></span>
+                        <p></p>
+                    </div>
                 </div>
             </div>
         </template>
-
     </main>
 </body>
 </html>

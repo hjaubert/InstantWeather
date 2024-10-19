@@ -14,11 +14,11 @@
         width: 27vh;
     }
 
-    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain,.fa-vial,.fa-wind,.fa-compass{
+    .iconesMeteo{
         font-size: 8vw;
     }
 
-    h2 {
+    p {
         font-size: 4vw;
     }
 
@@ -35,7 +35,35 @@
     }
 
     .choixParametres {
-        margin-bottom: 40px;
+        margin-bottom: 2vw;
+    }
+
+    .infosMeteo .iconesMeteo{
+        font-size: 6vw;
+    }
+
+    .carteV2 h4{
+        margin-bottom: 5px;
+    }
+
+    #meteoV2 {
+        width: 97%;
+    }
+
+    .carteV2 h4{
+        font-size: 4vw;
+        margin-top: 10px;
+        border-bottom: 3px solid black;
+        border-top: 3px solid black;
+        padding: 2px 0 2px 0;
+    }
+
+    #meteoV2 .infosMeteo .iconesMeteo {
+        font-size: 8vw;
+    }
+
+    #meteoV2 .infosMeteo p{
+        font-size: 3.5vw;
     }
 
 }
@@ -58,11 +86,11 @@
         width: 23vh;
     }
 
-    .fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain,.fa-vial,.fa-wind,.fa-compass{
-        font-size: 15vw;
+    .iconesMeteo{
+        font-size: 17vw;
     }
 
-    h2 {
+    p {
         font-size: 6.5vw;
     }
 
@@ -96,7 +124,47 @@
     }
 
     .choixParametres {
-        margin-bottom: 50px;
+        margin-bottom: 6vw;
+    }
+
+    #latitude, #longitude {
+        font-size: 0.9em;
+    }
+
+    .infosMeteo .iconesMeteo {
+        font-size: 10.5vw;
+    }
+
+    #meteoV2 .infosMeteo:last-child .iconesMeteo{
+        margin-top: 10px;
+    }
+
+    #meteoV2 .infosMeteo:last-child .iconesMeteo{
+        margin-bottom: 10px;
+    }
+
+    .infosMeteo p{
+        font-size: 4vw;
+        margin-left: 1vw;
+        font-weight: bold;
+    }
+
+    .carteV2 h4{
+        font-size: 3.5vw;
+        margin-bottom: 5px;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+        padding: 1px 0 1px 0;
+        margin-top: 5px;
+    }
+
+    #meteoV1 {
+        padding: 5px 0 5px 0;
+    }
+
+    #meteoV2 {
+        border-top: 2px solid black;
+        width: 95%;
     }
 
 }

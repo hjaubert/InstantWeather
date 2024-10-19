@@ -215,7 +215,7 @@ function changementFond(weatherCode){
         body.classList.remove("fondOrage")
         body.classList.remove("couleurPluie")
         body.classList.add("fondNeige")
-        snow.init(10);
+        snow.init(50);
     }
 
     if(valeurOrage.includes(weatherCode)){
@@ -258,7 +258,7 @@ function verifChiffre(chiffre){
 }
 
 function afficheVille(){
-    fetch('https://geo.api.gouv.fr/communes?codePostal='+ parseInt(str))
+    fetch('https://geo.api.gouv.fr/communes?codePostal='+ str)
     .then(reponse => {
     if(!reponse.ok){
         throw new Error("Network response was not ok");
@@ -324,6 +324,10 @@ function ajoutLatidudeLongitude(data){
     if(longitude == true){
         h5Longitude.innerText = "Longitude : " + data.city.longitude
     }
+    if(latitude == true && longitude == true){
+        h5Latitude.innerText = " ( Latitude : " + data.city.latitude
+        h5Longitude.innerText = ", Longitude : " + data.city.longitude + " )"
+    }
 }
 
 
@@ -356,6 +360,8 @@ function creationCarte(data){
 }
 
 function creationCarteV1(TypeCarte, valeur){
+    let divCarte = document.querySelector("#listeCarte")
+    divCarte.style.display = "flex"
     const template = document.getElementById("templateCarte")
     let clone = document.importNode(template.content, true)
 
@@ -367,69 +373,78 @@ function creationCarteV1(TypeCarte, valeur){
     
     switch (TypeCarte) {
         case "Ensoleillement":
-            span.classList.add("fa-regular", "fa-sun")
+            span.classList.add("fa-regular", "fa-sun", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " h" 
             break;
-        
             
         case "T° Min":
-            span.classList.add("fa-solid", "fa-temperature-low")
+            span.classList.add("fa-solid", "fa-temperature-low", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °C"
             break;
         
         case "T° Max":
-            span.classList.add("fa-solid", "fa-temperature-high")
+            span.classList.add("fa-solid", "fa-temperature-high", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °C"
             break;
     
         case "Proba pluie":
-            span.classList.add("fa-solid", "fa-cloud-rain")
+            span.classList.add("fa-solid", "fa-cloud-rain", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " %"
             break;
         case "Cumul Pluie":
-            span.classList.add("fa-solid", "fa-vial")
+            span.classList.add("fa-solid", "fa-droplet", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " mm"
             break;
         case "Vent Moyen":
-            span.classList.add("fa-solid", "fa-wind")
+            span.classList.add("fa-solid", "fa-wind", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " km/h"
             break;
         case "Direction Vent":
-            span.classList.add("fa-solid", "fa-compass")
+            span.classList.add("fa-solid", "fa-compass", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " °"
             break;
     }
     
-    let divCarte = document.querySelector("#listeCarte")
     divCarte.appendChild(clone)
     
 
 }
 
 const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+const mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
 var date = new Date()
 
 function creationCarteV2(data){
+    let divCarteV1 = document.querySelector("#listeCarte")
+    divCarteV1.style.display = "none"
     cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
     moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
     directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
+
     for (let i = 0; i < nbjour; i++){
+        var datePrecise = new Date(data.forecast[i].datetime)
+        // console.log(datePrecise.getDate() + " " + (datePrecise.getMonth()+1))
         let divCarte = document.querySelector("#listeCarteV2")
         const template = document.getElementById("templateCarteV2")
         let clone = document.importNode(template.content, true)
-    
+        
+        let donnesMeteo = clone.querySelectorAll(".infosMeteo")
+        console.log(donnesMeteo)
+        let meteoV2 = clone.querySelector("#meteoV2")
+        console.log(meteoV2)
+
         let h4 = clone.querySelectorAll("h4")
         if(i == 0){
             h4[0].textContent = "Aujourd'hui"
-        }else {
-            h4[0].textContent = jours[(date.getDay() + i)%7]            
+        } else {
+            h4[0].textContent = jours[(date.getDay() + i)%7] + " " + datePrecise.getDate() + " " + mois[datePrecise.getMonth()]
         }
 
         let p = clone.querySelectorAll("p")
@@ -440,19 +455,35 @@ function creationCarteV2(data){
 
         let span = clone.querySelectorAll("span")
 
+        if(cumulPlui == false && moyVent == false && directionVent == false){
+            meteoV2.style.display = "none"
+        }
+
         if(cumulPlui == true){
-            span[4].classList.add("fa-solid", "fa-vial")
+            meteoV2.style.display = "flex"
+            donnesMeteo[4].style.display = "flex"
+            span[4].classList.add("fa-solid", "fa-droplet", "iconesMeteo")
             p[4].textContent = data.forecast[i].rr10 + " mm"
+        } else {
+            donnesMeteo[4].style.display = "none"
         }
 
         if(moyVent == true){
-            span[5].classList.add("fa-solid", "fa-wind")
+            meteoV2.style.display = "flex"
+            donnesMeteo[5].style.display = "flex"
+            span[5].classList.add("fa-solid", "fa-wind", "iconesMeteo")
             p[5].textContent = data.forecast[i].wind10m + " km/h"
+        } else {
+            donnesMeteo[5].style.display = "none"
         }
 
         if(directionVent == true){
-            span[6].classList.add("fa-solid", "fa-compass")
+            meteoV2.style.display = "flex"
+            donnesMeteo[6].style.display = "flex"
+            span[6].classList.add("fa-solid", "fa-compass", "iconesMeteo")
             p[6].textContent = data.forecast[i].dirwind10m + " °"
+        } else {
+            donnesMeteo[6].style.display = "none"
         }
         
         divCarte.appendChild(clone)
