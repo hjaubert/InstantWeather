@@ -237,7 +237,7 @@ function verifChiffre(chiffre){
 }
 
 function afficheVille(){
-    fetch('https://geo.api.gouv.fr/communes?codePostal='+ parseInt(str))
+    fetch('https://geo.api.gouv.fr/communes?codePostal='+ str)
     .then(reponse => {
     if(!reponse.ok){
         throw new Error("Network response was not ok");
@@ -297,16 +297,26 @@ function ajoutLatidudeLongitude(data){
     var h5Longitude = document.getElementById("longitude")
     h5Latitude.innerText = ""
     h5Longitude.innerText = ""
+    console.log(latitude)
+    console.log(longitude)
+    console.log(latitude == true &&  longitude == true)
     if(latitude == true){
         h5Latitude.innerText = "Latitude : " + data.city.latitude
     }
     if(longitude == true){
         h5Longitude.innerText = "Longitude : " + data.city.longitude
     }
+    if(latitude == true && longitude == true){
+        h5Latitude.innerText = " ( Latitude : " + data.city.latitude
+        h5Longitude.innerText = ", Longitude : " + data.city.longitude + " )"
+    }
 }
 
 
 function creationCarte(data){
+    cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
+    moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
+    directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
     nbjour =  window.localStorage.getItem("ValeurJour")
     afficheCartes.innerHTML = ""
     afficheCartesV2.innerHTML = ""
@@ -332,6 +342,8 @@ function creationCarte(data){
 }
 
 function creationCarteV1(TypeCarte, valeur){
+    let divCarte = document.querySelector("#listeCarte")
+    divCarte.style.display = "flex"
     const template = document.getElementById("templateCarte")
     let clone = document.importNode(template.content, true)
 
@@ -383,20 +395,24 @@ function creationCarteV1(TypeCarte, valeur){
             break;
     }
     
-    let divCarte = document.querySelector("#listeCarte")
     divCarte.appendChild(clone)
     
 
 }
 
 const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+const mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
 var date = new Date()
 
 function creationCarteV2(data){
+    let divCarteV1 = document.querySelector("#listeCarte")
+    divCarteV1.style.display = "none"
     cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
     moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
     directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
     for (let i = 0; i < nbjour; i++){
+        var datePrecise = new Date(data.forecast[i].datetime)
+        // console.log(datePrecise.getDate() + " " + (datePrecise.getMonth()+1))
         let divCarte = document.querySelector("#listeCarteV2")
         const template = document.getElementById("templateCarteV2")
         let clone = document.importNode(template.content, true)
@@ -404,8 +420,8 @@ function creationCarteV2(data){
         let h4 = clone.querySelectorAll("h4")
         if(i == 0){
             h4[0].textContent = "Aujourd'hui"
-        }else {
-            h4[0].textContent = jours[(date.getDay() + i)%7]            
+        } else {
+            h4[0].textContent = jours[(date.getDay() + i)%7] + " " + datePrecise.getDate() + " " + mois[datePrecise.getMonth()]
         }
 
         let p = clone.querySelectorAll("p")
@@ -415,6 +431,8 @@ function creationCarteV2(data){
         p[3].textContent = data.forecast[i].probarain + " %"
 
         let span = clone.querySelectorAll("span")
+
+        let dataMeteoV2 = document.getElementById("meteoV2")
 
         if(cumulPlui == true){
             span[4].classList.add("fa-solid", "fa-vial")
