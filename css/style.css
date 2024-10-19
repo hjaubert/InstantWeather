@@ -125,7 +125,6 @@ input {
     display: flex;
     align-self: center;
     border-bottom: 4px solid black;
-    border-width: 100%;
     border-top: 4px solid black;
     /* box-shadow: 0 0 15px 0 rgb(102, 239, 198); */
 }
@@ -242,14 +241,6 @@ select {
     font-size: 3em;
     margin: 20px;
     cursor: pointer;
-}
-
-#boutonAnnuler :hover{
-    cursor: pointer;
-    transition: 0.9s;
-    transform: rotate3d(360deg);
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
 }
 
 #boutonAnnuler, #boutonValider {
