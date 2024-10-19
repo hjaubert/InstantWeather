@@ -35,11 +35,11 @@
     }
 
     .choixParametres {
-        margin-bottom: 40px;
+        margin-bottom: 2vw;
     }
 
     .infosMeteo .iconesMeteo{
-        font-size: 5.5vw;
+        font-size: 6vw;
     }
 
     .carteV2 h4{
@@ -51,11 +51,21 @@
     }
 
     .carteV2 h4{
-        margin-bottom: 5px;
-        border-bottom: 2px solid black;
-        border-top: 2px solid black;
+        font-size: 4vw;
+        margin-top: 10px;
+        border-bottom: 3px solid black;
+        border-top: 3px solid black;
         padding: 2px 0 2px 0;
     }
+
+    #meteoV2 .infosMeteo .iconesMeteo {
+        font-size: 8vw;
+    }
+
+    #meteoV2 .infosMeteo p{
+        font-size: 3.5vw;
+    }
+
 }
 
 @media screen and (max-width : 426px) {
@@ -114,7 +124,11 @@
     }
 
     .choixParametres {
-        margin-bottom: 50px;
+        margin-bottom: 6vw;
+    }
+
+    #latitude, #longitude {
+        font-size: 0.9em;
     }
 
     .infosMeteo .iconesMeteo {
@@ -136,10 +150,12 @@
     }
 
     .carteV2 h4{
+        font-size: 3.5vw;
         margin-bottom: 5px;
         border-bottom: 2px solid black;
         border-top: 2px solid black;
-        padding: 2px 0 2px 0;
+        padding: 1px 0 1px 0;
+        margin-top: 5px;
     }
 
     #meteoV1 {
@@ -147,7 +163,6 @@
     }
 
     #meteoV2 {
-        /* font-size: ; */
         border-top: 2px solid black;
         width: 95%;
     }

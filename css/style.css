@@ -130,21 +130,12 @@ input {
     /* box-shadow: 0 0 15px 0 rgb(102, 239, 198); */
 }
 
-#element{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 1.5vh;
-}
-
 .infosMeteo {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-left: 1.5vw;
     margin-right: 1.5vw;
-    /* border: 2px solid red; */
-    /* box-shadow: 0 0 15px 0 rgb(102, 239, 198); */
 }
 
 #meteoV1 {
@@ -153,7 +144,7 @@ input {
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
 }
 
 #meteoV2 {
@@ -284,7 +275,7 @@ select {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 3.5vh;
 }
 
 .choixParametres p {

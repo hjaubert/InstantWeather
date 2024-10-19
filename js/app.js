@@ -356,7 +356,6 @@ function creationCarteV1(TypeCarte, valeur){
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " h" 
             break;
-        
             
         case "T° Min":
             span.classList.add("fa-solid", "fa-temperature-low", "iconesMeteo")
@@ -376,7 +375,7 @@ function creationCarteV1(TypeCarte, valeur){
             h3[0].textContent = valeur + " %"
             break;
         case "Cumul Pluie":
-            span.classList.add("fa-solid", "fa-vial", "iconesMeteo")
+            span.classList.add("fa-solid", "fa-droplet", "iconesMeteo")
             p[0].textContent = TypeCarte
             h3[0].textContent = valeur + " mm"
             break;
@@ -442,7 +441,7 @@ function creationCarteV2(data){
         if(cumulPlui == true){
             meteoV2.style.display = "flex"
             donnesMeteo[4].style.display = "flex"
-            span[4].classList.add("fa-solid", "fa-vial", "iconesMeteo")
+            span[4].classList.add("fa-solid", "fa-droplet", "iconesMeteo")
             p[4].textContent = data.forecast[i].rr10 + " mm"
         } else {
             donnesMeteo[4].style.display = "none"
