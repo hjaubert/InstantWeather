@@ -112,7 +112,7 @@ input {
     border: solid 0.4vw black;
     border-radius: 3vw;
     margin: 1vh;
-    padding: 1% 1% 2%;
+    padding: 1% 1%;
     background-color: rgba(255,255,255,0.027);
     backdrop-filter: blur(10px);
     /* box-shadow: 0 0 15px 0 rgb(102, 239, 198); */
@@ -137,12 +137,6 @@ input {
     margin-top: 1.5vh;
 }
 
-.infosMeteo p{
-    font-size: 2vw;
-    margin-left: 1vw;
-    font-weight: bold;
-}
-
 .infosMeteo {
     display: flex;
     flex-direction: row;
@@ -155,7 +149,11 @@ input {
 
 #meteoV1 {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #meteoV2 {
@@ -163,11 +161,13 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-top: 5px solid black;
     width: 100%;
+    border-top: 3.5px solid black;
+    /* border: 5px solid blue; */
+    padding-top: 2%;
 }
 
-.infosMeteo .fa-sun, .infosMeteo .fa-temperature-low, .infosMeteo .fa-temperature-high, .infosMeteo .fa-cloud-rain, .infosMeteo .fa-vial, .infosMeteo .fa-wind, .infosMeteo .fa-compass{
+.infosMeteo .iconesMeteo{
     display: flex;
     margin: 0;
     padding: 0;
@@ -176,7 +176,7 @@ input {
 /************************ fin modife pour carte v2**********************************/
 
 
-.fa-sun,.fa-temperature-low,.fa-temperature-high,.fa-cloud-rain,.fa-vial,.fa-wind,.fa-compass {
+.iconesMeteo {
     font-size: 4vw;
     margin-top: 30px;
 }
@@ -211,6 +211,12 @@ h3{
 
 .villeChoisie:last-child{
     margin-bottom: 0;
+}
+
+p{
+    font-size: 2vw;
+    margin-left: 1vw;
+    font-weight: bold;
 }
 
 select {
