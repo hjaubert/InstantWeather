@@ -76,7 +76,7 @@ function AffichageDeBaseValeurInputRange(){
 }
 
 function changeOption(){
-  
+
     pageParametres.classList.remove("apparitionPageParam")
     pageParametres.classList.add("disparitionPageParam")
 
@@ -86,7 +86,6 @@ function changeOption(){
     window.localStorage.setItem("ValeuVentMoyen",changeVentMoyen.checked )
     window.localStorage.setItem("ValeurDirectionVent",changeDirectionVent.checked )
     window.localStorage.setItem("ValeurJour",choixJour.value )
-    chargeVariableLocal()
 
     if(infoMeteo != null){
         creationCarte(infoMeteo)
@@ -134,16 +133,6 @@ function chargeParametre(){
     changeVentMoyen.checked = validee(window.localStorage.getItem("ValeuVentMoyen"))
     changeDirectionVent.checked = validee(window.localStorage.getItem("ValeurDirectionVent"))
     choixJour.value = window.localStorage.getItem("ValeurJour")
-    chargeVariableLocal()
-}
-
-function chargeVariableLocal(){
-    latitude = validee(window.localStorage.getItem("ValeurLatitude"))
-    longitude = validee(window.localStorage.getItem("ValeurLongitude"))
-    cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
-    moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
-    directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
-    nbjour =  window.localStorage.getItem("ValeurJour")
 }
 
 function annulerParametres(){
@@ -302,6 +291,8 @@ function afficheMeteo(code){
 }
 
 function ajoutLatidudeLongitude(data){
+    latitude = validee(window.localStorage.getItem("ValeurLatitude"))
+    longitude = validee(window.localStorage.getItem("ValeurLongitude"))
     var h5Latitude = document.getElementById("latitude")
     var h5Longitude = document.getElementById("longitude")
     h5Latitude.innerText = ""
@@ -316,8 +307,9 @@ function ajoutLatidudeLongitude(data){
 
 
 function creationCarte(data){
-    afficheCartes.innerHTML = "";
-    afficheCartesV2.innerHTML = "";
+    nbjour =  window.localStorage.getItem("ValeurJour")
+    afficheCartes.innerHTML = ""
+    afficheCartesV2.innerHTML = ""
     if(nbjour == 1){
         creationCarteV1(TypeCarte.Ensoleillement,data.forecast[0].sun_hours)
         creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
@@ -401,7 +393,9 @@ const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 var date = new Date()
 
 function creationCarteV2(data){
-
+    cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
+    moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
+    directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
     for (let i = 0; i < nbjour; i++){
         let divCarte = document.querySelector("#listeCarteV2")
         const template = document.getElementById("templateCarteV2")
