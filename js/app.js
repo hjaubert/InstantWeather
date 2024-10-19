@@ -86,6 +86,7 @@ function changeOption(){
     window.localStorage.setItem("ValeuVentMoyen",changeVentMoyen.checked )
     window.localStorage.setItem("ValeurDirectionVent",changeDirectionVent.checked )
     window.localStorage.setItem("ValeurJour",choixJour.value )
+    chargeVariableLocal()
 
     if(infoMeteo != null){
         creationCarte(infoMeteo)
@@ -134,6 +135,26 @@ function chargeParametre(){
     changeDirectionVent.checked = validee(window.localStorage.getItem("ValeurDirectionVent"))
     choixJour.value = window.localStorage.getItem("ValeurJour")
 }
+
+function chargeVariableLocal(){
+    latitude = validee(window.localStorage.getItem("ValeurLatitude"))
+    longitude = validee(window.localStorage.getItem("ValeurLongitude"))
+    cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
+    moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
+    directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
+    nbjour =  window.localStorage.getItem("ValeurJour")
+    console.log(latitude)
+    console.log(longitude)
+    console.log(cumulPlui)
+    console.log(moyVent)
+    console.log(directionVent)
+}
+
+console.log(window.localStorage.getItem("ValeurLatitude"))
+console.log(window.localStorage.getItem("ValeurLongitude"))
+console.log(window.localStorage.getItem("ValeurCumulPluie"))
+console.log(window.localStorage.getItem("ValeuVentMoyen"))
+console.log(window.localStorage.getItem("ValeurDirectionVent"))
 
 function annulerParametres(){
     pageParametres.classList.remove("apparitionPageParam")
@@ -307,6 +328,9 @@ function ajoutLatidudeLongitude(data){
 
 
 function creationCarte(data){
+    cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
+    moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
+    directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
     nbjour =  window.localStorage.getItem("ValeurJour")
     afficheCartes.innerHTML = ""
     afficheCartesV2.innerHTML = ""
