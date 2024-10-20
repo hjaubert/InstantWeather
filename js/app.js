@@ -32,6 +32,7 @@ let fond = document.getElementById("fond")
 let afficheCartes = document.getElementById("listeCarte")
 let afficheCartesV2 = document.getElementById("listeCarteV2")
 let titreVille = document.getElementById("titreVille")
+titreVille.innerText = "";
 
 let pageParametres = document.getElementById("pageParametres")
 const choixJour = document.getElementById("choixJour")
