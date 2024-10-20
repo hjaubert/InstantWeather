@@ -62,7 +62,6 @@ input {
     margin: 1.5em;
     flex-wrap: wrap;
     gap: 100px;
-    /* border: 5px solid green; */
 }
 
 .carte{
@@ -110,7 +109,6 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 5px solid blue; */
     margin: 1.5em;
 }
 
@@ -124,9 +122,6 @@ input {
     border-radius: 3vw;
     margin: 1vh;
     padding: 1% 1%;
-    /* background-color: rgba(255,255,255,0.027); */
-    /* backdrop-filter: blur(10px); */
-    /* box-shadow: 0 0 15px 0 rgb(102, 239, 198); */
 }
 
 .carteV2 h4 {
@@ -137,7 +132,6 @@ input {
     align-self: center;
     border-bottom: 4px solid black;
     border-top: 4px solid black;
-    /* box-shadow: 0 0 15px 0 rgb(102, 239, 198); */
 }
 
 .infosMeteo {
@@ -164,7 +158,6 @@ input {
     align-items: center;
     width: 100%;
     border-top: 3.5px solid black;
-    /* border: 5px solid blue; */
     padding-top: 2%;
 }
 
@@ -226,7 +219,6 @@ select {
 
 /*********************Début style Page Paramètres*******************/
 #pageParametres {
-    /* visibility: hidden; */
     color: whitesmoke;
     position: fixed;
     background-color: rgb(35, 34, 34);
@@ -327,7 +319,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .valeur {
     position: absolute;
-    top: -30px; /* Position au-dessus du curseur */
+    top: -30px;
     transform: translateX(-60%);
     font-size: 1em;
     color: #333;
@@ -365,7 +357,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 /*****************************************************************************/
 
-/* The switch - the box around the slider */
 .switch {
     position: relative;
     display: inline-block;
@@ -373,14 +364,12 @@ input[type="range"]::-webkit-slider-thumb {
     height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -419,7 +408,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }

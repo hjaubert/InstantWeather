@@ -158,7 +158,7 @@ function annulerParametres(){
     pageParametres.classList.add("disparitionPageParam")
 }
 
-//Converti les valeurs du localStorage
+//Convertit les valeurs du localStorage
 function validee(valeur){
     if (valeur == "true"){
         return true
@@ -301,6 +301,7 @@ function afficheVille(){
         });
     });
 }
+
 //Récupère la météo de la ville
 function afficheMeteo(code){
     fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + code)
