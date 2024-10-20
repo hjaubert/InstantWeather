@@ -51,6 +51,7 @@ boutonAnnuler.addEventListener("click", annulerParametres);
 let boutonParametres = document.getElementById("boutonParametres")
 boutonParametres.addEventListener("click", chargeParametre);
 
+//Récupère la valeur de jour à afficher
 function getValeurInputRange(){
     const valeur = choixJour.value;
     afficheJour.textContent = valeur;
@@ -63,6 +64,8 @@ function getValeurInputRange(){
     afficheJour.style.left = window.localStorage.getItem("positionValeurInput")
 }
 
+
+//affiche la valeur de jour à afficher
 function AffichageDeBaseValeurInputRange(){
     const valeur = window.localStorage.getItem("ValeurJour")
     afficheJour.textContent = valeur
@@ -75,6 +78,7 @@ function AffichageDeBaseValeurInputRange(){
     afficheJour.style.left = window.localStorage.getItem("positionValeurInput")
 }
 
+//Permet de sauvegarder les options choisies par l'utilisateur
 function changeOption(){
 
     pageParametres.classList.remove("apparitionPageParam")
@@ -95,6 +99,7 @@ function changeOption(){
     
 }
 
+//Permet de charger les paramètres lorsque l'utilisateur veut changer les paramètres
 function chargeParametre(){
 
     AffichageDeBaseValeurInputRange()
@@ -135,6 +140,7 @@ function chargeParametre(){
     choixJour.value = window.localStorage.getItem("ValeurJour")
 }
 
+//Permet de charger les options au chargement de la page
 function chargeVariableLocal(){
     latitude = validee(window.localStorage.getItem("ValeurLatitude"))
     longitude = validee(window.localStorage.getItem("ValeurLongitude"))
@@ -144,11 +150,14 @@ function chargeVariableLocal(){
     nbjour =  window.localStorage.getItem("ValeurJour")
 }
 
+
+//Annule le changement des paramètres
 function annulerParametres(){
     pageParametres.classList.remove("apparitionPageParam")
     pageParametres.classList.add("disparitionPageParam")
 }
 
+//Converti les valeurs du localStorage
 function validee(valeur){
     if (valeur == "true"){
         return true
@@ -156,6 +165,8 @@ function validee(valeur){
     return false
 }
 
+
+//Permet de changer le fond en fonction du temps
 function changementFond(weatherCode, element){
     
     const valeurSoleil = [0,1,2]
@@ -217,7 +228,7 @@ function changementFond(weatherCode, element){
     }
 
 }
-
+//Permet d'enlever le fond
 function enleverFond(element){
     element.classList.remove("fondSoleil")
     element.classList.remove("fondPluie")
@@ -230,10 +241,8 @@ function enleverFond(element){
 
 zoneCodePostal.addEventListener("input", recherche);
 
-function changeURL(){
-    return false;
-}
 
+//Permet de vérifier que l'utilisateur rentre que des chiffres et recherche la ville
 function recherche(valeur){
     verifCaractere = valeur.target.value
     if (verifChiffre(verifCaractere.charCodeAt(verifCaractere.length -1)) == false){
@@ -248,6 +257,7 @@ function recherche(valeur){
     }
 }
 
+//Vérifie en ASCII que les valeurs rentrées sont des chiffres
 function verifChiffre(chiffre){
     if (chiffre >= 48 && chiffre <= 57){
         return true
@@ -255,6 +265,7 @@ function verifChiffre(chiffre){
     return false
 }
 
+//Récupère le code insee de la ville
 function afficheVille(){
     fetch('https://geo.api.gouv.fr/communes?codePostal='+ str)
     .then(reponse => {
@@ -289,7 +300,7 @@ function afficheVille(){
         });
     });
 }
-
+//Récupère la météo de la ville
 function afficheMeteo(code){
     fetch("https://api.meteo-concept.com/api/forecast/daily?token=" + token + "&insee=" + code)
     .then(reponse => {
@@ -308,6 +319,7 @@ function afficheMeteo(code){
     });
 }
 
+//Récupère la Latitude et Longitude et les affiche
 function ajoutLatidudeLongitude(data){
     latitude = validee(window.localStorage.getItem("ValeurLatitude"))
     longitude = validee(window.localStorage.getItem("ValeurLongitude"))
@@ -327,7 +339,7 @@ function ajoutLatidudeLongitude(data){
     }
 }
 
-
+//Gère la création des cartes
 function creationCarte(data){
     cumulPlui = validee(window.localStorage.getItem("ValeurCumulPluie"))
     moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
@@ -358,6 +370,7 @@ function creationCarte(data){
     }
 }
 
+//Crée les cartes et les affiche pour la version avec 1 jour
 function creationCarteV1(TypeCarte, valeur){
     let divCarte = document.querySelector("#listeCarte")
     divCarte.style.display = "flex"
@@ -420,6 +433,7 @@ const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
 var date = new Date()
 
+//Crée les cartes et les affiche pour la version avec plusieurs jours
 function creationCarteV2(data){
     let divCarteV1 = document.querySelector("#listeCarte")
     divCarteV1.style.display = "none"
@@ -489,6 +503,8 @@ function creationCarteV2(data){
     }
 }
 
+
+//Permet de faire l'effet de neige
 var snow = {
 
     vent : 0,
