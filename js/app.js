@@ -340,7 +340,7 @@ function creationCarte(data){
         creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
         creationCarteV1(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarteV1(TypeCarte.ProbaPluie,data.forecast[0].probarain)
-        changementFond(3, body)
+        changementFond(data.forecast[0].weather, body)
         if(cumulPlui == true){
             creationCarteV1(TypeCarte.CumulPlui,data.forecast[0].rr10)
         }
@@ -436,7 +436,7 @@ function creationCarteV2(data){
         let donnesMeteo = clone.querySelectorAll(".infosMeteo")
         let meteoV2 = clone.querySelector("#meteoV2")
         let CarteV2 = clone.querySelectorAll(".carteV2")
-        changementFond(data.forecast[i + 1].weather, CarteV2[0])
+        changementFond(data.forecast[i].weather, CarteV2[0])
 
 
         let h4 = clone.querySelectorAll("h4")
