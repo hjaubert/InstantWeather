@@ -22,35 +22,35 @@
         <div id="parametres">
             <div class="choixParametres">
                 <p>Latitude :</p>
-                <label class="switch">
+                <label class="switch" for="changeLatitude">.
                     <input type="checkbox" id="changeLatitude">
                     <span class="slider round" id="ChoixLatitude"></span>             
                 </label>
             </div>
             <div class="choixParametres">
                 <p>Longitude :</p>
-                <label class="switch">
+                <label class="switch" for="changeLongitude">.
                     <input type="checkbox" id="changeLongitude">
                     <span class="slider round" id="ChoixLongitude"></span>                
                 </label>
             </div>
             <div class="choixParametres">
                 <p>Cumul Pluie :</p>
-                <label class="switch">
+                <label class="switch" for="changeCumulPluie">.
                     <input type="checkbox" id="changeCumulPluie">
                     <span class="slider round" id="ChoixCumulPluie"></span>                
                 </label>
             </div>
             <div class="choixParametres">
                 <p>Vent moyen :</p>
-                <label class="switch">
+                <label class="switch" for="changeVentMoyen">.
                     <input type="checkbox" id="changeVentMoyen">
                     <span class="slider round" id="ChoixVentMoyen"></span>                
                 </label>
             </div>
             <div class="choixParametres">
                 <p>Direction du vent :</p>
-                <label class="switch">
+                <label class="switch" for="changeDirectionVent">.
                     <input type="checkbox" id="changeDirectionVent">
                     <span class="slider round" id="ChoixDirectionVent"></span>                
                 </label>
@@ -59,6 +59,7 @@
             <div class="choixParametres">
                 <p>Nombre de jours :</p>
                 <div class="inputRange">
+                    <label for="choixJour" class="redondance">Parametres </label>
                     <input type="range" id="choixJour" min="1" max="7" value="1">
                     <span class="valeur" id="afficheJour"></span>
                 </div>
@@ -79,9 +80,8 @@
         <!-- Recherche du code postal -->
         <div id="barreDeRecherche">
             <div id="inputRecherche">
-                <label for="zoneCodePostal">
-                    <input id="zoneCodePostal" autocomplete="off"  type="text" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
-                </label>
+                <label for="zoneCodePostal" class="redondance">Code Postal </label>
+                    <input type="text" id="zoneCodePostal" autocomplete="off" placeholder="Entrez votre code postal" pattern="^\d{5}$" maxlength="5" required>
             </div>
         </div>
         <div id="selection">
@@ -89,8 +89,8 @@
 
         <h2 id="titreVille"></h2>
         <div id="latitudeLongitude">
-            <h5 id="latitude"></h5>
-            <h5 id="longitude"></h5>
+            <h3 id="latitude"></h3>
+            <h3 id="longitude"></h3>
         </div>
 
         <div id="listeCarte">
