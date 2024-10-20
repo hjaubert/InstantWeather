@@ -127,7 +127,6 @@ function chargeParametre(){
         nbjour = 1;
     }
 
-    console.log(window.localStorage.getItem("ValeurJour"))
     changeLatitude.checked = validee(window.localStorage.getItem("ValeurLatitude"))
     changeLongitude.checked = validee(window.localStorage.getItem("ValeurLongitude"))
     changeCumulPluie.checked = validee(window.localStorage.getItem("ValeurCumulPluie"))
@@ -143,18 +142,7 @@ function chargeVariableLocal(){
     moyVent = validee(window.localStorage.getItem("ValeuVentMoyen"))
     directionVent = validee(window.localStorage.getItem("ValeurDirectionVent"))
     nbjour =  window.localStorage.getItem("ValeurJour")
-    console.log(latitude)
-    console.log(longitude)
-    console.log(cumulPlui)
-    console.log(moyVent)
-    console.log(directionVent)
 }
-
-console.log(window.localStorage.getItem("ValeurLatitude"))
-console.log(window.localStorage.getItem("ValeurLongitude"))
-console.log(window.localStorage.getItem("ValeurCumulPluie"))
-console.log(window.localStorage.getItem("ValeuVentMoyen"))
-console.log(window.localStorage.getItem("ValeurDirectionVent"))
 
 function annulerParametres(){
     pageParametres.classList.remove("apparitionPageParam")
@@ -168,7 +156,7 @@ function validee(valeur){
     return false
 }
 
-function changementFond(weatherCode){
+function changementFond(weatherCode, element){
     
     const valeurSoleil = [0,1,2]
     const valeurNuageux = [3,4,5]
@@ -179,55 +167,65 @@ function changementFond(weatherCode){
         134,135,136,137,138]
 
     if(valeurSoleil.includes(weatherCode)){
-        body.classList.remove("fondNuage")
-        body.classList.remove("fondPluie")
-        body.classList.remove("fondNeige")
-        body.classList.remove("fondOrage")
-        body.classList.remove("couleurPluie")
+        element.classList.remove("fondNuage")
+        element.classList.remove("fondPluie")
+        element.classList.remove("fondNeige")
+        element.classList.remove("fondOrage")
+        element.classList.remove("couleurPluie")
         snow.init(0)
-        body.classList.add("fondSoleil")
+        element.classList.add("fondSoleil")
     }
 
     if(valeurNuageux.includes(weatherCode)){
-        body.classList.remove("fondSoleil")
-        body.classList.remove("fondPluie")
-        body.classList.remove("fondNeige")
-        body.classList.remove("fondOrage")
-        body.classList.remove("couleurPluie")
+        element.classList.remove("fondSoleil")
+        element.classList.remove("fondPluie")
+        element.classList.remove("fondNeige")
+        element.classList.remove("fondOrage")
+        element.classList.remove("couleurPluie")
         snow.init(0)
-        body.classList.add("fondNuage")
+        element.classList.add("fondNuage")
     }
 
     if(valeurPluie.includes(weatherCode)){
-        body.classList.remove("fondSoleil")
-        body.classList.remove("fondNuage")
-        body.classList.remove("fondNeige")
-        body.classList.remove("fondOrage")
+        element.classList.remove("fondSoleil")
+        element.classList.remove("fondNuage")
+        element.classList.remove("fondNeige")
+        element.classList.remove("fondOrage")
         snow.init(0)
-        body.classList.add("couleurPluie")
-        body.classList.add("fondPluie")
+        element.classList.add("couleurPluie")
+        element.classList.add("fondPluie")
     }
 
     if(valeurNeige.includes(weatherCode)){
-        body.classList.remove("fondSoleil")
-        body.classList.remove("fondPluie")
-        body.classList.remove("fondNuage")
-        body.classList.remove("fondOrage")
-        body.classList.remove("couleurPluie")
-        body.classList.add("fondNeige")
+        element.classList.remove("fondSoleil")
+        element.classList.remove("fondPluie")
+        element.classList.remove("fondNuage")
+        element.classList.remove("fondOrage")
+        element.classList.remove("couleurPluie")
+        element.classList.add("fondNeige")
         snow.init(50);
     }
 
     if(valeurOrage.includes(weatherCode)){
-        body.classList.remove("fondSoleil")
-        body.classList.remove("fondPluie")
-        body.classList.remove("fondNuage")
-        body.classList.remove("fondNuage")
-        body.classList.remove("couleurPluie")
+        element.classList.remove("fondSoleil")
+        element.classList.remove("fondPluie")
+        element.classList.remove("fondNuage")
+        element.classList.remove("fondNuage")
+        element.classList.remove("couleurPluie")
         snow.init(0)
-        body.classList.add("fondOrage")
+        element.classList.add("fondOrage")
     }
 
+}
+
+function enleverFond(element){
+    element.classList.remove("fondSoleil")
+    element.classList.remove("fondPluie")
+    element.classList.remove("fondNuage")
+    element.classList.remove("fondNuage")
+    element.classList.remove("couleurPluie")
+    element.classList.remove("fondOrage")
+    snow.init(0)
 }
 
 zoneCodePostal.addEventListener("input", recherche);
@@ -304,7 +302,6 @@ function afficheMeteo(code){
         infoMeteo = data
         ajoutLatidudeLongitude(data)
         creationCarte(data)
-        changementFond(data.forecast[0].weather)
     })
     .catch(error => {
         alert("Attention meteo bug")
@@ -343,6 +340,7 @@ function creationCarte(data){
         creationCarteV1(TypeCarte.TMax,data.forecast[0].tmax)
         creationCarteV1(TypeCarte.TMin,data.forecast[0].tmin)
         creationCarteV1(TypeCarte.ProbaPluie,data.forecast[0].probarain)
+        changementFond(data.forecast[0].weather, body)
         if(cumulPlui == true){
             creationCarteV1(TypeCarte.CumulPlui,data.forecast[0].rr10)
         }
@@ -356,6 +354,7 @@ function creationCarte(data){
         }
     } else {
         creationCarteV2(data);
+        enleverFond(body)
     }
 }
 
@@ -430,15 +429,15 @@ function creationCarteV2(data){
 
     for (let i = 0; i < nbjour; i++){
         var datePrecise = new Date(data.forecast[i].datetime)
-        // console.log(datePrecise.getDate() + " " + (datePrecise.getMonth()+1))
         let divCarte = document.querySelector("#listeCarteV2")
         const template = document.getElementById("templateCarteV2")
         let clone = document.importNode(template.content, true)
         
         let donnesMeteo = clone.querySelectorAll(".infosMeteo")
-        console.log(donnesMeteo)
         let meteoV2 = clone.querySelector("#meteoV2")
-        console.log(meteoV2)
+        let CarteV2 = clone.querySelectorAll(".carteV2")
+        changementFond(data.forecast[i].weather, CarteV2[0])
+
 
         let h4 = clone.querySelectorAll("h4")
         if(i == 0){
