@@ -1,13 +1,17 @@
 .fondNuage {
     background-position: center;
+    background-size: cover;
     animation: fondNuage 3s forwards;
 }
 
 @keyframes fondNuage {
     50% {
         background-color: whitesmoke;
-    } 100% {
-        background-image: url(../images/abstrait-nuage-fumee-blanche-doux-blanc-fumee-exploser-nuageux_1319560-33430.avif);
+    } 75% {
+        background-color: lightblue;
+    } 
+    100% {
+        background-image: url(../images/Sky_Clouds_576578_3840x2400.jpg);
     }
 }
 
