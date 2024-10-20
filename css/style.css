@@ -85,10 +85,10 @@ input {
 
 @keyframes trans {
     from {
-        top:100%;
+        left:100%;
     }
     to{
-        top: 0%;
+        left: 0%;
     }
 }
 
