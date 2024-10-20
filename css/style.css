@@ -226,6 +226,7 @@ select {
     right: 100%;
     top: 0;
     z-index: 1;
+    overflow-y: scroll;
 }
 
 #parametres {
