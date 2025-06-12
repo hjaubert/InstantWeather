@@ -1,7 +1,7 @@
 # 🌧️🌤️ InstantWeather
 Création d'un site en HTML, CSS et Javascript implémentant une application météo
 
-📄Lien vers le site GitHub Pages : https://gogo425.github.io/InstantWeather/
+📄Lien vers le site GitHub Pages : https://hjaubert.github.io/InstantWeather/
 
 ## 📖 Description du projet :
 ### 🧰V1 :
